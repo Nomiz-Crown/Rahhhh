@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class enemy : MonoBehaviour
 {
-    public GameObject objectToClone;     // Scene object (disabled)
-    public Transform[] spawnPoints;      // 4 spawn points
+    public GameObject objectToClone;
+    public Transform[] spawnPoints;      // 4 spawn points for now
     public float targetY = 7.7f;
     public float moveSpeed = 3f;
     public float spawnInterval = 5f;
@@ -37,10 +37,10 @@ public class enemy : MonoBehaviour
 
         StartCoroutine(MoveUpAndDestroy(clone));
 
-        // Move to next spawn point
+        // jag HATAR
         currentSpawnIndex++;
 
-        // Loop back to first spawn point
+        // wahh
         if (currentSpawnIndex >= spawnPoints.Length)
         {
             currentSpawnIndex = 0;

@@ -47,7 +47,7 @@ public class Towers : MonoBehaviour
         if (validator != null && !validator.CanPlace)
             return;
 
-        // Make the radius invisible instead of deactivating it
+       
         Transform radius = currentTower.transform.Find("radius");
         if (radius != null)
         {
@@ -66,6 +66,7 @@ public class Towers : MonoBehaviour
                 c.a = 0f;
                 childSR.color = c;
             }
+            //tower placement scriptet yk yk yk yk
             validator = currentTower.GetComponentInChildren<TowerPlacementValidator>();
 
             // Set targeting script to active

@@ -16,14 +16,14 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        // Get input (WASD / Arrow Keys)
+        // (WASD / Arrow Keys)
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
     }
 
     void FixedUpdate()
     {
-        // Apply movement
+        // apply move grej
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
 }
