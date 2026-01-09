@@ -2,16 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovment : MonoBehaviour
+public class MonsterMovment : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    public float moveSpeed = 3f;
+    public Transform[] WayPoint; //target 
 
+    private int currentIndex = 0; 
     private Rigidbody2D rb;
     private Vector2 movement;
 
-    private Animator animator; 
+    private Animator animator;
 
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -19,12 +21,23 @@ public class PlayerMovment : MonoBehaviour
 
     void Update()
     {
-        // (WASD / Arrow Keys)
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        if(currentIndex >= WayPoint.Length)
+        {
+            movement = Vector2.zero;
+            return; 
+        }
+        Vector2 target = WayPoint[currentIndex].position;
+        Vector2 dir = (target - rb.position);
+        
+        if (dir.magnitude < 0.05)
+        {
+            currentIndex++;
+        }
+        else
+        {
+            movement = dir.normalized;
+        }
 
-        //no diagonal speed bost
-        movement = movement.normalized;
 
         //animations
         animator.SetFloat("MoveX", movement.x);
