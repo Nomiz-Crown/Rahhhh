@@ -5,14 +5,15 @@ using UnityEngine;
 public class MonsterMovment : MonoBehaviour
 {
     public float moveSpeed = 3f;
-    public Transform target; //target 
+    public Transform[] WayPoint; //target 
 
+    private int currentIndex = 0; 
     private Rigidbody2D rb;
     private Vector2 movement;
 
     private Animator animator;
 
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -20,20 +21,21 @@ public class MonsterMovment : MonoBehaviour
 
     void Update()
     {
-        if(target == null)
+        if(currentIndex >= WayPoint.Length)
         {
             movement = Vector2.zero;
             return; 
         }
-        Vector2 direction = (target.position - transform.position); 
+        Vector2 target = WayPoint[currentIndex].position;
+        Vector2 dir = (target - rb.position);
         
-        if (direction.magnitude < 0.05)
+        if (dir.magnitude < 0.05)
         {
-            movement = Vector2.zero;
+            currentIndex++;
         }
         else
         {
-            movement = direction.normalized;
+            movement = dir.normalized;
         }
 
 
