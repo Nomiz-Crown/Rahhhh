@@ -7,36 +7,41 @@ public class MonsterAttack : MonoBehaviour
     public int attack = 10;
     public float waitSecBeforeAttack = 1.5f;
 
-    private bool canAttack = true; 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Door") && canAttack)
-        { 
-            DoorHP  door = collision.gameObject.GetComponent<DoorHP>();
+    private bool canAttack = true;
+    private DoorHP doorInRange;
 
-            if (door != null)
-            {
-                door.takeDamage(attack);
-                StartCoroutine(AttackCooldown());
-            }
+    // Called once when entering the door collider
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Door"))
+        {
+            doorInRange = collision.GetComponent<DoorHP>();
         }
     }
-    private IEnumerator AttackCooldown()
+
+    // Called when leaving the door collider
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        canAttack = false;      //  så inte attackerar igen
-        yield return new WaitForSeconds(waitSecBeforeAttack); // Wait
-        canAttack = true;             // kan attackera          
+        if (collision.CompareTag("Door"))
+        {
+            doorInRange = null;
+        }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        
+        if (doorInRange != null && canAttack)
+        {
+            doorInRange.takeDamage(attack); // damage the door
+            StartCoroutine(AttackCooldown());
+        }
     }
+
+    private IEnumerator AttackCooldown()
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(waitSecBeforeAttack);
+        canAttack = true;
+    }
+
 }

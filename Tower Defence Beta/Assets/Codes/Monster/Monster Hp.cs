@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class MonsterHp : MonoBehaviour
 {
-    public int maxHp;
+    public int maxHp = 100;
     private int currentHP;
     // Start is called before the first frame update
     void Start()
     {
-        maxHp = currentHP; 
+        currentHP = maxHp; 
     }
 
     // Update is called once per frame
@@ -22,7 +22,7 @@ public class MonsterHp : MonoBehaviour
         }
 
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         // currentHp - attack;   CODE FÖR SENARE 
 

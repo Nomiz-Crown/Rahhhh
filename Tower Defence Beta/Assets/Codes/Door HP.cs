@@ -10,7 +10,7 @@ public class DoorHP : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DoorMaxHp = DoorCurrentHp;
+        DoorCurrentHp = DoorMaxHp;
     }
 
 
