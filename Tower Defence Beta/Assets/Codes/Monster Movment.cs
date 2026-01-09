@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovment : MonoBehaviour
+public class MonsterMovment : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    public float moveSpeed = 3f;
+    public Transform target; //target 
 
     private Rigidbody2D rb;
     private Vector2 movement;
 
-    private Animator animator; 
+    private Animator animator;
 
     void Start()
     {
@@ -19,12 +20,22 @@ public class PlayerMovment : MonoBehaviour
 
     void Update()
     {
-        // (WASD / Arrow Keys)
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        if(target == null)
+        {
+            movement = Vector2.zero;
+            return; 
+        }
+        Vector2 direction = (target.position - transform.position); 
+        
+        if (direction.magnitude < 0.05)
+        {
+            movement = Vector2.zero;
+        }
+        else
+        {
+            movement = direction.normalized;
+        }
 
-        //no diagonal speed bost
-        movement = movement.normalized;
 
         //animations
         animator.SetFloat("MoveX", movement.x);
