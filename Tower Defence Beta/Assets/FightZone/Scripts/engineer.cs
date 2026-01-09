@@ -146,7 +146,7 @@ public class engineer : MonoBehaviour
     {
         if (isTyping)
         {
-            // Finish current line instantly if still typing
+            // Finish current line instantly if still typing, älskar detta
             StopAllCoroutines();
             dialogueText.text = dialogueLines[currentLine];
             isTyping = false;
