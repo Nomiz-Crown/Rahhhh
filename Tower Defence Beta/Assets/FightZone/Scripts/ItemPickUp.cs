@@ -1,18 +1,67 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemPickUp : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [Header("References")]
+    public GameObject objectToActivate;
+
+    private bool playerInTrigger = false;
+
+    // Persistent pickup state
+    public static bool pickedUp = false; // survives scene reload
+
+    private const string PICKEDUP_KEY = "WrenchPickedUp";
+
     void Start()
     {
-        
+        if (pickedUp)
+        {
+            if (objectToActivate != null)
+                objectToActivate.SetActive(false);
+
+            gameObject.SetActive(false);
+        }
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        
+        if (playerInTrigger && !pickedUp && Input.GetKeyDown(KeyCode.E))
+        {
+            PickUp();
+        }
+    }
+
+    void PickUp()
+    {
+        pickedUp = true;
+
+        if (objectToActivate != null)
+            objectToActivate.SetActive(false);
+
+        gameObject.SetActive(false);
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player") && !pickedUp)
+        {
+            playerInTrigger = true;
+
+            if (objectToActivate != null)
+                objectToActivate.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInTrigger = false;
+
+            if (objectToActivate != null)
+                objectToActivate.SetActive(false);
+        }
     }
 }

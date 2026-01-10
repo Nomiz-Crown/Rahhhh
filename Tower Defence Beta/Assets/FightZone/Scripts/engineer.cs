@@ -1,9 +1,20 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class engineer : MonoBehaviour
 {
+    [Header("Inventory")]
+    public inventory playerInventory;
+
+    [Header("Pickup Check")] //jag älskar dem här headerssss
+    public GameObject itemPickupRoot; 
+    public string[] dialogueIfPickedUp;
+    public string[] dialogueIfNotPickedUp;
+
+    private ItemPickUp linkedPickup;
+
+
     [Header("Dialogue Settings")]
     public Text dialogueText;           
     public string[] dialogueLines;     
@@ -18,7 +29,7 @@ public class engineer : MonoBehaviour
     [HideInInspector]
     public bool isInConversation = false;
 
-    public GameObject uiTextObject; //JAG �LSKAR PEPSI
+    public GameObject uiTextObject; //JAG ÄLSKAR PEPSI
 
 
     public GameObject targetObject;
@@ -33,12 +44,32 @@ public class engineer : MonoBehaviour
         if (uiTextObject != null)
             uiTextObject.SetActive(false);
 
-        if (hasPlayed)
-            return;
+        if (!hasPlayed)
+        {
+            hasPlayed = true;
+            StartCoroutine(ActivateAndAnimate());
+        }
+        else
+        {
+            // Make sure the target object is deactivated if it already ran
+            if (targetObject != null)
+                targetObject.SetActive(false);
+        }
 
-        hasPlayed = true;
-        StartCoroutine(ActivateAndAnimate());
+        if (itemPickupRoot != null)
+        {
+            linkedPickup = itemPickupRoot.GetComponentInChildren<ItemPickUp>();
+        }
+        // Check if player already picked up the item and hide engineer if so
+        if (linkedPickup != null && ItemPickUp.pickedUp)
+        {
+            inventory.turret = true; // give turret
+            gameObject.SetActive(false); // stay hidden
+        }
+
     }
+
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -51,6 +82,8 @@ public class engineer : MonoBehaviour
 
                     if (dialogueLines.Length > 0 && dialogueText != null)
                     {
+                        targetObject.SetActive(false);
+                        SelectDialogue();
                         currentLine = 0;
                         StartCoroutine(TypeDialogue(dialogueLines[currentLine]));
                     }
@@ -59,7 +92,7 @@ public class engineer : MonoBehaviour
                 // Start conversation
                 isInConversation = true;
 
-                // Hide the UI text, uhh like the d�r E tro talk grejen
+                // Hide the UI text, uhh like the där E tro talk grejen
                 uiTextObject.SetActive(false);
 
                 // Activate the new object LALAL
@@ -146,7 +179,7 @@ public class engineer : MonoBehaviour
     {
         if (isTyping)
         {
-            // Finish current line instantly if still typing, �lskar detta
+            // Finish current line instantly if still typing, älskar detta
             StopAllCoroutines();
             dialogueText.text = dialogueLines[currentLine];
             isTyping = false;
@@ -165,9 +198,25 @@ public class engineer : MonoBehaviour
             newObjectToActivate.SetActive(false);
             isInConversation = false;
             currentLine = 0;
+
+            // If the player has picked up the item, give turret in inventory
+            if (linkedPickup != null && ItemPickUp.pickedUp)
+            {
+                // Already picked up → give turret and hide engineer
+                inventory.turret = true;
+                gameObject.SetActive(false);
+            }
+
+
+
         }
     }
-
-
+    void SelectDialogue()
+    {
+        if (linkedPickup != null && ItemPickUp.pickedUp) //vi behöver andvända class name, annars funkish den inte loool
+            dialogueLines = dialogueIfPickedUp;
+        else
+            dialogueLines = dialogueIfNotPickedUp;
+    }
 
 }
