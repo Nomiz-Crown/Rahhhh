@@ -14,7 +14,7 @@ public class TopDownMovementNoAnimator : MonoBehaviour
     private Vector2 lastDir;
     private float frameTimer;
     private int frameIndex;
-
+    Rigidbody2D rb;
     void Update()
     {
         movement.x = Input.GetAxisRaw("Horizontal");
@@ -57,4 +57,10 @@ public class TopDownMovementNoAnimator : MonoBehaviour
         if (movement.x > 0 || lastDir.x > 0) return rightFrames;
         return downFrames;
     }
+    
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 }
+
