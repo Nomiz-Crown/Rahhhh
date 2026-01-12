@@ -12,16 +12,22 @@ public class MonsterMovment : MonoBehaviour
     private Vector2 movement;
 
     private Animator animator;
-
+    private SpriteRenderer sr;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
-        if(currentIndex >= WayPoint.Length)
+        if (movement.x != 0)
+        {
+            sr.flipX = movement.x < 0;
+        }
+   
+        if (currentIndex >= WayPoint.Length)
         {
             movement = Vector2.zero;
             return; 
@@ -51,3 +57,4 @@ public class MonsterMovment : MonoBehaviour
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
 }
+    
