@@ -1,222 +1,137 @@
-﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
+using System.Collections;
 
-public class engineer : MonoBehaviour
+public class Engineer : MonoBehaviour
 {
-    [Header("Inventory")]
-    public inventory playerInventory;
+    [Header("UI")]
+    public TextMeshProUGUI talkPrompt;
+    public GameObject dialoguePanel;
+    public TextMeshProUGUI dialogueText;
+    public UnityEngine.UI.Button continueButton;
+    public RectTransform portrait; // assign the portrait Image's RectTransform here
 
-    [Header("Pickup Check")] //jag älskar dem här headerssss
-    public GameObject itemPickupRoot; 
-    public string[] dialogueIfPickedUp;
-    public string[] dialogueIfNotPickedUp;
+    [Header("Dialogue")]
+    [TextArea(3, 5)]
+    public string[] dialogueLines;
+    public float typingSpeed = 0.05f;
+    public float portraitBobAmount = 5f; // pixels
+    public float portraitBobSpeed = 20f;  // pixels per second
 
-    private ItemPickUp linkedPickup;
+    [Header("State")]
+    public bool isTalking = false;
 
+    private bool playerInRange = false;
+    private int currentLineIndex = 0;
+    private Coroutine typingCoroutine;
 
-    [Header("Dialogue Settings")]
-    public Text dialogueText;           
-    public string[] dialogueLines;     
-    public float typingSpeed = 0.05f;  
-
-    private int currentLine = 0;
-    private bool isTyping = false;
-
-    [Header("UI & Interaction")]
-    public GameObject newObjectToActivate;
-
-    [HideInInspector]
-    public bool isInConversation = false;
-
-    public GameObject uiTextObject; //JAG ÄLSKAR PEPSI
-
-
-    public GameObject targetObject;
-
-    public float scaleAmount = 1.2f;
-    public float scaleSpeed = 3f;
-
-    private static bool hasPlayed = false;
+    private Vector3 portraitOriginalPos;
 
     void Start()
     {
-        if (uiTextObject != null)
-            uiTextObject.SetActive(false);
+        talkPrompt.gameObject.SetActive(false);
+        dialoguePanel.SetActive(false);
 
-        if (!hasPlayed)
-        {
-            hasPlayed = true;
-            StartCoroutine(ActivateAndAnimate());
-        }
-        else
-        {
-            // Make sure the target object is deactivated if it already ran
-            if (targetObject != null)
-                targetObject.SetActive(false);
-        }
+        continueButton.onClick.AddListener(NextLine);
 
-        if (itemPickupRoot != null)
-        {
-            linkedPickup = itemPickupRoot.GetComponentInChildren<ItemPickUp>();
-        }
-        // Check if player already picked up the item and hide engineer if so
-        if (linkedPickup != null && ItemPickUp.pickedUp)
-        {
-            inventory.turret = true; // give turret
-            gameObject.SetActive(false); // stay hidden
-        }
-
+        if (portrait != null)
+            portraitOriginalPos = portrait.localPosition;
     }
-
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        // Prompt logic
+        talkPrompt.gameObject.SetActive(playerInRange && !isTalking);
+
+        // Start talking
+        if (playerInRange && !isTalking && Input.GetKeyDown(KeyCode.E))
         {
-            if (uiTextObject != null && uiTextObject.activeSelf)
+            StartDialogue();
+        }
+    }
+
+    void StartDialogue()
+    {
+        isTalking = true;
+        dialoguePanel.SetActive(true);
+        currentLineIndex = 0;
+
+        StartTyping(dialogueLines[currentLineIndex]);
+    }
+
+    void StartTyping(string line)
+    {
+        if (typingCoroutine != null)
+            StopCoroutine(typingCoroutine);
+
+        typingCoroutine = StartCoroutine(TypeText(line));
+    }
+
+    IEnumerator TypeText(string line)
+    {
+        dialogueText.text = "";
+        continueButton.gameObject.SetActive(false);
+
+        float timer = 0f; // used for portrait bobbing
+        foreach (char letter in line)
+        {
+            dialogueText.text += letter;
+
+            // Portrait bob
+            if (portrait != null)
             {
-                if (newObjectToActivate != null)
-                {
-                    newObjectToActivate.SetActive(true);
-
-                    if (dialogueLines.Length > 0 && dialogueText != null)
-                    {
-                        targetObject.SetActive(false);
-                        SelectDialogue();
-                        currentLine = 0;
-                        StartCoroutine(TypeDialogue(dialogueLines[currentLine]));
-                    }
-                }
-
-                // Start conversation
-                isInConversation = true;
-
-                // Hide the UI text, uhh like the där E tro talk grejen
-                uiTextObject.SetActive(false);
-
-                // Activate the new object LALAL
-                if (newObjectToActivate != null)
-                    newObjectToActivate.SetActive(true);
+                timer += Time.deltaTime * portraitBobSpeed;
+                portrait.localPosition = portraitOriginalPos + Vector3.up * Mathf.Sin(timer) * portraitBobAmount;
             }
+
+            yield return new WaitForSeconds(typingSpeed);
         }
+
+        // Reset portrait
+        if (portrait != null)
+            portrait.localPosition = portraitOriginalPos;
+
+        continueButton.gameObject.SetActive(true);
     }
 
-    IEnumerator ActivateAndAnimate()
+    public void NextLine()
     {
-        targetObject.SetActive(true);
+        currentLineIndex++;
 
-        Vector3 originalScale = targetObject.transform.localScale;
-        Vector3 biggerScale = originalScale * scaleAmount;
-
-        yield return StartCoroutine(ScaleTo(biggerScale));
-        yield return StartCoroutine(ScaleTo(originalScale));
-        yield return StartCoroutine(ScaleTo(biggerScale));
-        yield return StartCoroutine(ScaleTo(originalScale));
-
-        yield return new WaitForSeconds(5f);
-
-        targetObject.SetActive(false);
-    }
-
-    IEnumerator ScaleTo(Vector3 targetScale)
-    {
-        while (Vector3.Distance(targetObject.transform.localScale, targetScale) > 0.01f)
+        if (currentLineIndex < dialogueLines.Length)
         {
-            targetObject.transform.localScale = Vector3.Lerp(
-                targetObject.transform.localScale,
-                targetScale,
-                Time.deltaTime * scaleSpeed
-            );
-            yield return null;
+            StartTyping(dialogueLines[currentLineIndex]);
         }
+        else
+        {
+            EndDialogue();
+        }
+    }
 
-        targetObject.transform.localScale = targetScale;
+    void EndDialogue()
+    {
+        isTalking = false;
+        dialoguePanel.SetActive(false);
+        dialogueText.text = "";
+
+        // Reset portrait position
+        if (portrait != null)
+            portrait.localPosition = portraitOriginalPos;
+        // Create quest after dialogue ends
+        Quest newQuest = new Quest("Engineer", "Find a Wrench", "Turret BluePrint");
+        Debug.Log(newQuest.objective + " reward: " + newQuest.reward + " quest from: " + newQuest.questGiver);
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && !isInConversation)
-        {
-            if (uiTextObject != null)
-                uiTextObject.SetActive(true);
-        }
+        if (other.CompareTag("Player"))
+            playerInRange = true;
     }
-
 
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
-        {
-            // Hide the UI text. i love pepsi
-            if (uiTextObject != null)
-                uiTextObject.SetActive(false);
-
-            // If in conversation, end it when player leaves
-            if (isInConversation)
-            {
-                isInConversation = false;
-
-                if (newObjectToActivate != null)
-                    newObjectToActivate.SetActive(false);
-            }
-        }
+            playerInRange = false;
     }
-    private IEnumerator TypeDialogue(string line)
-    {
-        isTyping = true;
-        dialogueText.text = "";
-
-        foreach (char letter in line.ToCharArray())
-        {
-            dialogueText.text += letter;
-            yield return new WaitForSeconds(typingSpeed);
-        }
-
-        isTyping = false;
-    }
-    public void ShowNextDialogue()
-    {
-        if (isTyping)
-        {
-            // Finish current line instantly if still typing, älskar detta
-            StopAllCoroutines();
-            dialogueText.text = dialogueLines[currentLine];
-            isTyping = false;
-            return;
-        }
-
-        currentLine++;
-
-        if (currentLine < dialogueLines.Length)
-        {
-            StartCoroutine(TypeDialogue(dialogueLines[currentLine]));
-        }
-        else
-        {
-            // End of dialogue, hide box and reset
-            newObjectToActivate.SetActive(false);
-            isInConversation = false;
-            currentLine = 0;
-
-            // If the player has picked up the item, give turret in inventory
-            if (linkedPickup != null && ItemPickUp.pickedUp)
-            {
-                // Already picked up → give turret and hide engineer
-                inventory.turret = true;
-                gameObject.SetActive(false);
-            }
-
-
-
-        }
-    }
-    void SelectDialogue()
-    {
-        if (linkedPickup != null && ItemPickUp.pickedUp) //vi behöver andvända class name, annars funkish den inte loool
-            dialogueLines = dialogueIfPickedUp;
-        else
-            dialogueLines = dialogueIfNotPickedUp;
-    }
-
 }
