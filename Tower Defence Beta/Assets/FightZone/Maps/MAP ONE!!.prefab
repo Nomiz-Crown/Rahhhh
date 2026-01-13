@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 38b2e9dfde5d5864db15a05c2e9316f7, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.30515, g: 0.4544366, b: 0.8742138, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3659,6 +3659,18 @@ PrefabInstance:
     - target: {fileID: 6026399545796765398, guid: 6aa90d88b613832479693e1a28004a18, type: 3}
       propertyPath: m_Name
       value: basement_floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7131645111489284078, guid: 6aa90d88b613832479693e1a28004a18, type: 3}
+      propertyPath: m_Color.b
+      value: 0.8742138
+      objectReference: {fileID: 0}
+    - target: {fileID: 7131645111489284078, guid: 6aa90d88b613832479693e1a28004a18, type: 3}
+      propertyPath: m_Color.g
+      value: 0.4544366
+      objectReference: {fileID: 0}
+    - target: {fileID: 7131645111489284078, guid: 6aa90d88b613832479693e1a28004a18, type: 3}
+      propertyPath: m_Color.r
+      value: 0.30515
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
