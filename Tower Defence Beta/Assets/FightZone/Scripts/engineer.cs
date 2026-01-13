@@ -9,7 +9,7 @@ public class Engineer : MonoBehaviour
     public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueText;
     public UnityEngine.UI.Button continueButton;
-    public RectTransform portrait; // assign the portrait Image's RectTransform here
+    public RectTransform portrait; // assign the portrait Image's RectTransform here (om det inte är rectform INSERTA INTE DEN DIN HUMONCULUS
 
     [Header("Dialogue")]
     [TextArea(3, 5)]
@@ -40,10 +40,10 @@ public class Engineer : MonoBehaviour
 
     void Update()
     {
-        // Prompt logic
+        // logic jag Gillar, du kan ändra om du intish gillish
         talkPrompt.gameObject.SetActive(playerInRange && !isTalking);
 
-        // Start talking
+        // Start talking med engineer snubbe gubben
         if (playerInRange && !isTalking && Input.GetKeyDown(KeyCode.E))
         {
             StartDialogue();
@@ -77,7 +77,7 @@ public class Engineer : MonoBehaviour
         {
             dialogueText.text += letter;
 
-            // Portrait bob
+            // bobbing bobbing bobbign
             if (portrait != null)
             {
                 timer += Time.deltaTime * portraitBobSpeed;
@@ -114,10 +114,9 @@ public class Engineer : MonoBehaviour
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
 
-        // Reset portrait position
         if (portrait != null)
             portrait.localPosition = portraitOriginalPos;
-        // Create quest after dialogue ends
+        // Create quest after dialogue ends, MURRELBRADT, KEVIN LUSTYCH
         Quest newQuest = new Quest("Engineer", "Find a Wrench", "Turret BluePrint");
         Debug.Log(newQuest.objective + " reward: " + newQuest.reward + " quest from: " + newQuest.questGiver);
 
