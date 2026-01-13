@@ -10,7 +10,18 @@ public class MonsterAttack : MonoBehaviour
     private bool canAttack = true;
     private DoorHP doorInRange;
 
-    // Called once when entering the door collider
+   
+    public GameObject attackEffectPrefab; 
+    public Transform effectSpawnPoint;  
+
+    private void DoAttackEffect()
+    {
+        if (attackEffectPrefab != null && effectSpawnPoint != null)
+        {
+            GameObject effect = Instantiate(attackEffectPrefab, effectSpawnPoint.position, effectSpawnPoint.rotation);
+            Destroy(effect, 0.5f); 
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Door"))
@@ -33,6 +44,7 @@ public class MonsterAttack : MonoBehaviour
         if (doorInRange != null && canAttack)
         {
             doorInRange.takeDamage(attack); // damage the door
+            DoAttackEffect();
             StartCoroutine(AttackCooldown());
         }
     }
