@@ -3,9 +3,9 @@ using UnityEngine.UI;
 public class questmanager : MonoBehaviour
 {
     public static questmanager instance;
-   
     
-    
+
+
     public GameObject questui;
 
     private void Awake()
