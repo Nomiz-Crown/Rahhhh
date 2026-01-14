@@ -6,24 +6,27 @@ public class TrackLock : MonoBehaviour
     [System.Serializable]
     public class TrackSquare
     {
-        [Header("Paths")]
+        [Header("Bottom Paths")]
         public List<GameObject> topToBottom = new List<GameObject>();
         public bool topToBottomBlocked;
-
-        public List<GameObject> topToRight = new List<GameObject>();
-        public bool topToRightBlocked;
-
-        public List<GameObject> topToLeft = new List<GameObject>();
-        public bool topToLeftBlocked;
-
-        public List<GameObject> leftToRight = new List<GameObject>();
-        public bool leftToRightBlocked;
 
         public List<GameObject> leftToBottom = new List<GameObject>();
         public bool leftToBottomBlocked;
 
         public List<GameObject> rightToBottom = new List<GameObject>();
         public bool rightToBottomBlocked;
+
+        [Header("Left Paths")]
+        public List<GameObject> topToLeft = new List<GameObject>();
+        public bool topToLeftBlocked;
+
+        [Header("Right Paths")]
+        public List<GameObject> topToRight = new List<GameObject>();
+        public bool topToRightBlocked;
+
+        public List<GameObject> leftToRight = new List<GameObject>();
+        public bool leftToRightBlocked;
+
 
         public string label;          // idk, kan vara useful senare
         public GameObject lockObject; // lock for this square
