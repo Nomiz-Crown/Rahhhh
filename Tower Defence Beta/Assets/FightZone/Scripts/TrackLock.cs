@@ -125,57 +125,74 @@ public class TrackLock : MonoBehaviour
     }
 #endif
 
-    private IEnumerator MoveThroughPaths(GameObject moverObj)
+    private IEnumerator MoveAlongPath(GameObject moverObj, List<GameObject> path)
     {
-        // list of topToBottom paths in order
-        List<List<GameObject>> paths = new List<List<GameObject>>()
-    {
-        square_0_1.topToBottom,
-        square_1_1.topToBottom,
-        square_2_1.topToBottom
-    };
-
-        foreach (var path in paths)
+        foreach (var waypoint in path)
         {
-            if (path == null || path.Count == 0) continue;
+            Vector3 startPos = moverObj.transform.position;
+            Vector3 endPos = waypoint.transform.position;
 
-            foreach (var waypoint in path)
+            float distance = Vector3.Distance(startPos, endPos);
+            float travelTime = distance / moveSpeed;
+            float elapsed = 0f;
+
+            while (elapsed < travelTime)
             {
-                Vector3 startPos = moverObj.transform.position;
-                Vector3 endPos = waypoint.transform.position;
-
-                float distance = Vector3.Distance(startPos, endPos);
-                float travelTime = distance / moveSpeed;
-                float elapsed = 0f;
-
-                while (elapsed < travelTime)
-                {
-                    moverObj.transform.position = Vector3.Lerp(startPos, endPos, elapsed / travelTime);
-                    elapsed += Time.deltaTime;
-                    yield return null;
-                }
-
-                moverObj.transform.position = endPos;
+                moverObj.transform.position = Vector3.Lerp(startPos, endPos, elapsed / travelTime);
+                elapsed += Time.deltaTime;
+                yield return null;
             }
+
+            moverObj.transform.position = endPos;
         }
 
-        Debug.Log("Clone finished all paths!");
+        Destroy(moverObj); // Optional: remove clone after finishing path
     }
+
     private void SpawnClone()
     {
         if (mover == null) return;
 
-        // Path 1: TopToBottom
-        List<GameObject> path = square_0_1.topToBottom;
+        // Define the 3 paths
+        List<List<GameObject>> possiblePaths = new List<List<GameObject>>();
 
-        if (path == null || path.Count == 0) return;
+        // Path 1: TopToBottom
+        List<GameObject> path1 = new List<GameObject>();
+        path1.AddRange(square_0_1.topToBottom);
+        path1.AddRange(square_1_1.topToBottom);
+        path1.AddRange(square_2_1.topToBottom);
+        possiblePaths.Add(path1);
+
+        // Path 2: 0_1 TopToRight → 0_2 LeftToBottom → 1_2 TopToBottom → 2_2 TopToLeft → 2_1 RightToBottom
+        // Path 2
+        List<GameObject> path2 = new List<GameObject>();
+        path2.AddRange(square_0_1.topToRight);
+        path2.AddRange(square_0_2.leftToBottom);
+        path2.AddRange(square_1_2.topToBottom);
+        path2.AddRange(square_2_2.topToLeft);
+        path2.AddRange(square_2_1.rightToBottom);
+        possiblePaths.Add(path2);
+
+        // Path 3
+        List<GameObject> path3 = new List<GameObject>();
+        path3.AddRange(square_0_1.topToLeft);
+        path3.AddRange(square_0_0.rightToBottom);
+        path3.AddRange(square_1_0.topToBottom);
+        path3.AddRange(square_2_0.topToRight);
+        path3.AddRange(square_2_1.leftToBottom);
+        possiblePaths.Add(path3);
+
+
+        // Pick a random path
+        List<GameObject> chosenPath = possiblePaths[Random.Range(0, possiblePaths.Count)];
 
         // Spawn clone at first waypoint
-        GameObject moverClone = Instantiate(mover, path[0].transform.position, mover.transform.rotation);
+        GameObject moverClone = Instantiate(mover, chosenPath[0].transform.position, mover.transform.rotation);
 
-        // Start moving the clone along the path
-        StartCoroutine(MoveThroughPaths(moverClone));
+        // Start moving the clone along the chosen path
+        StartCoroutine(MoveAlongPath(moverClone, chosenPath));
     }
+
     private IEnumerator SpawnClonesContinuously()
     {
         while (true)

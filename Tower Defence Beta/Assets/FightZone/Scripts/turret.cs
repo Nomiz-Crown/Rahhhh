@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class turret : MonoBehaviour
 {
+    private float bulletTimer = 0f;
+
     [Header("Bullet Settings")]
     public Transform bullet;
     public float bulletSpeed = 10f;
@@ -60,7 +62,22 @@ public class turret : MonoBehaviour
                 bulletTarget = enemy.transform;
                 bulletStartPos = bullet.position = transform.position; // <- update start pos here
                 bullet.gameObject.SetActive(true);
+                bulletTimer = 0f; // reset timer
                 StartCoroutine(AttackCooldown());
+            }
+            if (bulletFlying)
+            {
+                bulletTimer += Time.deltaTime;
+
+                // If bullet has been flying more than 2 seconds, reset it
+                if (bulletTimer >= 2f)
+                {
+                    bullet.position = bulletStartPos;
+                    bullet.gameObject.SetActive(false);
+                    bulletFlying = false;
+                    bulletTarget = null;
+                    bulletTimer = 0f;
+                }
             }
         }
 
