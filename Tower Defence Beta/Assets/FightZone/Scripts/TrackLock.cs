@@ -146,7 +146,7 @@ public class TrackLock : MonoBehaviour
             moverObj.transform.position = endPos;
         }
 
-        Destroy(moverObj); // Optional: remove clone after finishing path
+       // Destroy(moverObj); // Optional: remove clone after finishing path
     }
 
     private void SpawnClone()

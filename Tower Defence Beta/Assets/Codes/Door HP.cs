@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DoorHP : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class DoorHP : MonoBehaviour
         DoorCurrentHp -= attack;
         if( DoorCurrentHp <= 0)
         {
-            Destroy(gameObject); 
+            SceneManager.LoadSceneAsync(0); 
         }
     }
     // Update is called once per frame
