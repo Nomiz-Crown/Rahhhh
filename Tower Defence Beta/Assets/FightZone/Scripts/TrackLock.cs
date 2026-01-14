@@ -1,17 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using static TrackLock.TrackSquare;
+using System.Collections;
 
 public class TrackLock : MonoBehaviour
 {
-    private TrackSquare nextSquare;
-    private EntryDirection nextEntryDir;
+    public GameObject mover; // the object that will follow the waypoints
 
-    private enum EntryDirection { Top, Left, Right }
-    private EntryDirection entryDir;
-
-    [Header("Follower Settings")]
-    public GameObject follower;   //enemy sak
     public float moveSpeed = 2f;  // units per second
 
     private TrackSquare currentSquare;
@@ -49,10 +44,6 @@ public class TrackLock : MonoBehaviour
         public string label;          // idk, kan vara useful senare
         public GameObject lockObject; // lock for this square
         public bool isOpen;
-
-        [Header("Next Square Offset")]
-        public int rowDelta;    // +1 = move down, -1 = move up
-        public int columnDelta; // +1 = move right, -1 = move left
     }
 
     [Header("Row 0")]
@@ -72,7 +63,14 @@ public class TrackLock : MonoBehaviour
 
     void Start()
     {
-        entryDir = EntryDirection.Top;
+        if (mover != null && square_0_1.topToBottom.Count > 0)
+        {
+            // Spawn clone at the first waypoint of square_0_1.topToBottom
+            //GameObject moverClone = Instantiate(mover, square_0_1.topToBottom[0].transform.position, mover.transform.rotation);
+            StartCoroutine(SpawnClonesContinuously());
+
+        }
+
 
         // Lock everything
         SetSquare(square_0_0, true);  //set tilll false efter playtest brosky
@@ -89,79 +87,9 @@ public class TrackLock : MonoBehaviour
         // Start square is always open
         SetSquare(square_2_1, true);
 
-        currentSquare = square_0_1;   // top middle start
-        entryDir = EntryDirection.Top;
-
-        PickNextPath();
-
-    }
-
-    List<(TrackSquare square, EntryDirection newEntry)> GetAvailableMoves(TrackSquare square)
-    {
-        var moves = new List<(TrackSquare, EntryDirection)>();
-        if (square == null) return moves;
-
-        switch (entryDir)
-        {
-            case EntryDirection.Top:
-                if (!square.topToBottomBlocked)
-                    foreach (var obj in square.topToBottom)
-                        moves.Add((obj.GetComponent<TrackSquare>(), EntryDirection.Top));
-                if (!square.topToLeftBlocked)
-                    foreach (var obj in square.topToLeft)
-                        moves.Add((obj.GetComponent<TrackSquare>(), EntryDirection.Right));
-                if (!square.topToRightBlocked)
-                    foreach (var obj in square.topToRight)
-                        moves.Add((obj.GetComponent<TrackSquare>(), EntryDirection.Left));
-                break;
-
-            case EntryDirection.Left:
-                if (!square.leftToBottomBlocked)
-                    foreach (var obj in square.leftToBottom)
-                        moves.Add((obj.GetComponent<TrackSquare>(), EntryDirection.Top));
-                if (!square.leftToRightBlocked)
-                    foreach (var obj in square.leftToRight)
-                        moves.Add((obj.GetComponent<TrackSquare>(), EntryDirection.Left));
-                break;
-
-            case EntryDirection.Right:
-                if (!square.rightToBottomBlocked)
-                    foreach (var obj in square.rightToBottom)
-                        moves.Add((obj.GetComponent<TrackSquare>(), EntryDirection.Top));
-                break;
-        }
-
         
 
-        return moves;
     }
-
-    void PickNextPath()
-    {
-        if (currentSquare == null) return;
-
-        // Pick which waypoint list to follow based on entry direction
-        switch (entryDir)
-        {
-            case EntryDirection.Top: currentPath = currentSquare.topToBottom; break;
-            case EntryDirection.Left: currentPath = currentSquare.leftToRight; break;
-            case EntryDirection.Right: currentPath = currentSquare.rightToBottom; break;
-        }
-
-        // Set the next square using the row/column offset
-        nextSquare = GetSquareByOffset(currentSquare, currentSquare.rowDelta, currentSquare.columnDelta);
-
-        // Keep the entry direction based on where the follower came from
-        nextEntryDir = entryDir;
-
-        waypointIndex = 0;
-        follower.transform.position = currentPath[0].transform.position;
-        isMoving = true;
-    }
-
-
-
-
 
     void SetSquare(TrackSquare square, bool open)
     {
@@ -175,11 +103,6 @@ public class TrackLock : MonoBehaviour
         if (square.lockObject != null)
             square.lockObject.SetActive(!square.isOpen);
     }
-
-    // ───── Optional helpers ─────
-    public void Unlock_1_1() => SetSquare(square_1_1, true);
-    public void Unlock_2_2() => SetSquare(square_2_2, true);
-    public void Lock_0_0() => SetSquare(square_0_0, false);
 
 #if UNITY_EDITOR
     void OnValidate()
@@ -202,71 +125,66 @@ public class TrackLock : MonoBehaviour
     }
 #endif
 
-    void Update()
+    private IEnumerator MoveThroughPaths(GameObject moverObj)
     {
-        if (!isMoving || currentPath == null || follower == null) return;
+        // list of topToBottom paths in order
+        List<List<GameObject>> paths = new List<List<GameObject>>()
+    {
+        square_0_1.topToBottom,
+        square_1_1.topToBottom,
+        square_2_1.topToBottom
+    };
 
-        Transform target = currentPath[waypointIndex].transform;
-
-        follower.transform.position = Vector3.MoveTowards(
-            follower.transform.position,
-            target.position,
-            moveSpeed * Time.deltaTime
-        );
-
-        if (Vector3.Distance(follower.transform.position, target.position) < 0.01f)
+        foreach (var path in paths)
         {
-            waypointIndex++;
+            if (path == null || path.Count == 0) continue;
 
-            if (waypointIndex >= currentPath.Count)
+            foreach (var waypoint in path)
             {
-                // Finished this path → choose next one
-                isMoving = false;
+                Vector3 startPos = moverObj.transform.position;
+                Vector3 endPos = waypoint.transform.position;
 
-                // Entry direction updates AFTER path completion
-                if (currentPath == currentSquare.topToLeft)
-                    entryDir = EntryDirection.Right;
-                else if (currentPath == currentSquare.topToRight)
-                    entryDir = EntryDirection.Left;
-                else
-                    entryDir = EntryDirection.Top;
+                float distance = Vector3.Distance(startPos, endPos);
+                float travelTime = distance / moveSpeed;
+                float elapsed = 0f;
 
-                PickNextPath();
+                while (elapsed < travelTime)
+                {
+                    moverObj.transform.position = Vector3.Lerp(startPos, endPos, elapsed / travelTime);
+                    elapsed += Time.deltaTime;
+                    yield return null;
+                }
+
+                moverObj.transform.position = endPos;
             }
         }
-    }
-    private TrackSquare GetSquareByOffset(TrackSquare square, int rowDelta, int columnDelta)
-    {
-        int newRow = squareRow(square) + rowDelta;
-        int newCol = squareColumn(square) + columnDelta;
 
-        // Example: manually check all squares
-        if (newRow == 0 && newCol == 0) return square_0_0;
-        if (newRow == 0 && newCol == 1) return square_0_1;
-        if (newRow == 0 && newCol == 2) return square_0_2;
-        if (newRow == 1 && newCol == 0) return square_1_0;
-        if (newRow == 1 && newCol == 1) return square_1_1;
-        if (newRow == 1 && newCol == 2) return square_1_2;
-        if (newRow == 2 && newCol == 0) return square_2_0;
-        if (newRow == 2 && newCol == 1) return square_2_1;
-        if (newRow == 2 && newCol == 2) return square_2_2;
-
-        return null; // out of bounds
+        Debug.Log("Clone finished all paths!");
     }
-
-    // Optional helpers to get current square's row/column
-    private int squareRow(TrackSquare square)
+    private void SpawnClone()
     {
-        if (square == square_0_0 || square == square_0_1 || square == square_0_2) return 0;
-        if (square == square_1_0 || square == square_1_1 || square == square_1_2) return 1;
-        return 2;
+        if (mover == null) return;
+
+        // Path 1: TopToBottom
+        List<GameObject> path = square_0_1.topToBottom;
+
+        if (path == null || path.Count == 0) return;
+
+        // Spawn clone at first waypoint
+        GameObject moverClone = Instantiate(mover, path[0].transform.position, mover.transform.rotation);
+
+        // Start moving the clone along the path
+        StartCoroutine(MoveThroughPaths(moverClone));
     }
-    private int squareColumn(TrackSquare square)
+    private IEnumerator SpawnClonesContinuously()
     {
-        if (square == square_0_0 || square == square_1_0 || square == square_2_0) return 0;
-        if (square == square_0_1 || square == square_1_1 || square == square_2_1) return 1;
-        return 2;
+        while (true)
+        {
+            SpawnClone();
+            yield return new WaitForSeconds(2f); // spawn every 2 seconds
+        }
     }
+
 
 
 
