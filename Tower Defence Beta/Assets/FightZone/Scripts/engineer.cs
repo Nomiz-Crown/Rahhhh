@@ -4,6 +4,8 @@ using System.Collections;
 
 public class Engineer : MonoBehaviour
 {
+    public bool isQuestComplete = false;
+
     public static Engineer instance;
     [Header("UI")]
     public TextMeshProUGUI talkPrompt;
@@ -139,7 +141,7 @@ public class Engineer : MonoBehaviour
             if (playerHasWrench)
             {
                 Debug.Log("rub m belly, thanksss");
-                // Give turret?? 
+                isQuestComplete = true; 
             }
             else
             {

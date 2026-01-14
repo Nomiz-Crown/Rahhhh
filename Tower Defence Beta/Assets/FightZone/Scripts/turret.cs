@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class turret : MonoBehaviour
 {
+     
+
+
     private float bulletTimer = 0f;
 
     [Header("Bullet Settings")]
@@ -37,7 +41,7 @@ public class turret : MonoBehaviour
     void Update()
     {
         // Handle turret placement
-        if (isPlacing && turretInstance != null)
+        if (isPlacing && turretInstance != null && Engineer.instance.isQuestComplete == true)
         {
             Vector3 mousePos = Input.mousePosition;
             mousePos.z = 10f;
