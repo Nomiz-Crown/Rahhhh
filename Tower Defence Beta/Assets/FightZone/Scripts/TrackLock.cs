@@ -198,7 +198,7 @@ public class TrackLock : MonoBehaviour
         while (true)
         {
             SpawnClone();
-            yield return new WaitForSeconds(2f); // spawn every 2 seconds
+            yield return new WaitForSeconds(2f); // 2f = 2 sekunder. uhh space mellan spawn. (spawn rate)
         }
     }
 
