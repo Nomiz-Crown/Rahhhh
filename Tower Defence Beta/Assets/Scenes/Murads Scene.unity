@@ -143,6 +143,8 @@ MonoBehaviour:
   hp1: {fileID: 0}
   hp2: {fileID: 0}
   hp3: {fileID: 0}
+  deathPrefab: {fileID: 36673897765474775, guid: 8f2f4b01b160e684bbaad263749ab5df, type: 3}
+  deathAnimLength: 1
 --- !u!1 &879705971
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,7 +287,7 @@ PrefabInstance:
       objectReference: {fileID: 1521599395}
     - target: {fileID: 5207808784546220442, guid: 8eb4a0bb861003b4ab676baaa84bc9a1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 73.15
+      value: 67.8
       objectReference: {fileID: 0}
     - target: {fileID: 5207808784546220442, guid: 8eb4a0bb861003b4ab676baaa84bc9a1, type: 3}
       propertyPath: m_LocalPosition.y
