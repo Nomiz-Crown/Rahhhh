@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class WrenchPickUp : MonoBehaviour
 {
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.E)) 
         {
-            WrenchQuestManager.instance.hasWrench = true;
+            Engineer.instance.playerHasWrench = true;
             Destroy(gameObject);
         }
     }

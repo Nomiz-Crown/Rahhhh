@@ -4,6 +4,7 @@ using System.Collections;
 
 public class Engineer : MonoBehaviour
 {
+    public static Engineer instance;
     [Header("UI")]
     public TextMeshProUGUI talkPrompt;
     public GameObject dialoguePanel;
@@ -11,13 +12,21 @@ public class Engineer : MonoBehaviour
     public UnityEngine.UI.Button continueButton;
     public RectTransform portrait; // assign the portrait Image's RectTransform here (om det inte är rectform INSERTA INTE DEN DIN HUMONCULUS
 
-    [Header("Dialogue")]
-    [TextArea(3, 5)]
-    public string[] dialogueLines;
     public float typingSpeed = 0.05f;
     public float portraitBobAmount = 5f; // pixels
     public float portraitBobSpeed = 20f;  // pixels per second
 
+    [Header("Dialogue")]
+    [TextArea(3, 5)]
+    public string[] dialogueLines;
+
+    [Header("Dialogue Sets")]
+    [TextArea(3, 5)]
+    public string[] dialogue_NoWrench;
+
+    [TextArea(3, 5)]
+    public string[] dialogue_WithWrench;
+    
     [Header("State")]
     public bool isTalking = false;
 
@@ -27,6 +36,7 @@ public class Engineer : MonoBehaviour
 
     private Vector3 portraitOriginalPos;
 
+    public bool playerHasWrench = false;
     void Start()
     {
         talkPrompt.gameObject.SetActive(false);
@@ -50,14 +60,24 @@ public class Engineer : MonoBehaviour
         }
     }
 
-    void StartDialogue()
+    void Awake()
     {
-        isTalking = true;
-        dialoguePanel.SetActive(true);
-        currentLineIndex = 0;
-
-        StartTyping(dialogueLines[currentLineIndex]);
+        instance = this;
     }
+        void StartDialogue()
+        {
+            isTalking = true;
+            dialoguePanel.SetActive(true);
+            currentLineIndex = 0;
+
+            if (playerHasWrench)
+                dialogueLines = dialogue_WithWrench;
+            else
+                dialogueLines = dialogue_NoWrench;
+
+            StartTyping(dialogueLines[currentLineIndex]);
+        }
+    
 
     void StartTyping(string line)
     {
@@ -107,20 +127,25 @@ public class Engineer : MonoBehaviour
             EndDialogue();
         }
     }
+        void EndDialogue()
+        {
+            isTalking = false;
+            dialoguePanel.SetActive(false);
+            dialogueText.text = "";
 
-    void EndDialogue()
-    {
-        isTalking = false;
-        dialoguePanel.SetActive(false);
-        dialogueText.text = "";
+            if (portrait != null)
+                portrait.localPosition = portraitOriginalPos;
 
-        if (portrait != null)
-            portrait.localPosition = portraitOriginalPos;
-        // Create quest after dialogue ends, MURRELBRADT, KEVIN LUSTYCH
-        Quest newQuest = new Quest("Engineer", "Find a Wrench", "Turret BluePrint");
-        Debug.Log(newQuest.objective + " reward: " + newQuest.reward + " quest from: " + newQuest.questGiver);
-
-    }
+            if (playerHasWrench)
+            {
+                Debug.Log("rub m belly, thanksss");
+                // Give turret?? 
+            }
+            else
+            {
+                Debug.Log("Where is my wreinch ??????");
+            }
+        }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
