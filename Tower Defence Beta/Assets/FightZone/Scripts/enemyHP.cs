@@ -7,9 +7,10 @@ public class enemyHP : MonoBehaviour
     [Header("Enemy Health")]
     public int health = 3;
 
+   
     [Header("HP Display")]
-    public GameObject hp1;
-    public GameObject hp2;
+     public GameObject hp1;
+     public GameObject hp2;
     public GameObject hp3;
 
     [Header("Death Clone")]
