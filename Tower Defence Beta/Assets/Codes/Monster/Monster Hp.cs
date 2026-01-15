@@ -28,11 +28,6 @@ public class MonsterHp : MonoBehaviour
         }
 
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // currentHp - attack;   CODE FÖR SENARE 
-
-    }
     private void Die()
     {
         if (BloodEffect != null && effectSpawnPoint != null)
@@ -40,5 +35,10 @@ public class MonsterHp : MonoBehaviour
             GameObject effect = Instantiate(BloodEffect, effectSpawnPoint.position, effectSpawnPoint.rotation);
             Destroy(effect, 0.5f);
         }
+    }
+    public void TakeDamage(int damageAmount)   
+    {
+        currentHP -= damageAmount;
+      
     }
 }

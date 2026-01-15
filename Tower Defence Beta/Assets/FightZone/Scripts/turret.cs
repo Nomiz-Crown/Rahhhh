@@ -96,7 +96,7 @@ public class turret : MonoBehaviour
             if (Vector3.Distance(bullet.position, bulletTarget.position) < 0.1f)
             {
                 // Damage enemy
-                bulletTarget.GetComponent<enemyHP>()?.TakeDamage(1);
+                bulletTarget.GetComponent<MonsterHp>()?.TakeDamage(1);
 
                 // Reset bullet
                 bullet.position = bulletStartPos;
