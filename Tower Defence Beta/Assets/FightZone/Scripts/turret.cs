@@ -1,10 +1,12 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class turret : MonoBehaviour
 {
+    private bool isPlaced = true;
+
     public GameObject CantPlace;
     private GameObject rangeIndicator;
     private bool isSelected = false;
@@ -34,15 +36,37 @@ public class turret : MonoBehaviour
     private void Start()
     {
         CantPlace.SetActive(false);
+
+        // 🔥 THIS FIXES IT 🔥 yay tack gpt
+        Transform range = transform.Find("Range");
+        {
+            rangeIndicator = range.gameObject;
+            rangeIndicator.SetActive(false);
+        }
+
         if (bullet != null)
         {
             bulletStartPos = bullet.position;
-            bullet.gameObject.SetActive(false); // invisible until shooting
+            bullet.gameObject.SetActive(false);
         }
-
     }
+
     void Update()
     {
+        if (!isPlacing && Input.GetMouseButtonDown(0))
+        {
+            RaycastHit2D hit = Physics2D.Raycast(
+                Camera.main.ScreenToWorldPoint(Input.mousePosition),
+                Vector2.zero
+        );
+
+        if (hit.collider == null || hit.collider.transform.root != transform)
+        {
+            isSelected = false;
+            if (rangeIndicator != null)
+                rangeIndicator.SetActive(false);
+            }
+        } 
         if(isPlacing){
             CantPlace.SetActive(true);
         }
@@ -57,6 +81,7 @@ public class turret : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 isPlacing = false;
+                isPlaced = true;
                 rangeIndicator.SetActive(false);
                 turretInstance = null;
                 CantPlace.SetActive(false);
@@ -121,13 +146,16 @@ public class turret : MonoBehaviour
         if (!isPlacing)
         {
             turretInstance = Instantiate(turretPrefab);
-            rangeIndicator = turretInstance.transform.Find("Range")?.gameObject;
-            if (rangeIndicator!= null){
-                rangeIndicator.SetActive(true);
-                isPlacing = true;
-            }
+            isPlaced = false; // this one is a ghost
+
+            GameObject ghostRange = turretInstance.transform.Find("Range")?.gameObject;
+            if (ghostRange != null)
+                ghostRange.SetActive(true);
+
+            isPlacing = true;
         }
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -160,11 +188,13 @@ public class turret : MonoBehaviour
         canAttack = true;
     }
 
-    void OnMouseDown(){
-        if(isPlacing) return;
+    public void OnHitboxClicked()
+    {
+        if (isPlacing) return;
 
         isSelected = !isSelected;
-
-        rangeIndicator.SetActive(isSelected);
+            rangeIndicator.SetActive(isSelected);
     }
+
+
 }
