@@ -27,7 +27,7 @@ public class turret : MonoBehaviour
     public float attackCooldown = 1.5f;
 
     private bool canAttack = true;
-    private List<enemyHP> enemiesInRange = new List<enemyHP>();
+    private List<MonsterHp> enemiesInRange = new List<MonsterHp>();
 
     private void Start()
     {
@@ -59,7 +59,7 @@ public class turret : MonoBehaviour
         // Attack the first enemy in range if possible
         if (canAttack && enemiesInRange.Count > 0)
         {
-            enemyHP enemy = enemiesInRange[0];
+            MonsterHp enemy = enemiesInRange[0];
             if (enemy != null && !bulletFlying)
             {
                 bulletFlying = true;
@@ -96,7 +96,7 @@ public class turret : MonoBehaviour
             if (Vector3.Distance(bullet.position, bulletTarget.position) < 0.1f)
             {
                 // Damage enemy
-                bulletTarget.GetComponent<MonsterHp>()?.TakeDamage(1);
+                bulletTarget.GetComponent<MonsterHp>()?.TakeDamage(25);
 
                 // Reset bullet
                 bullet.position = bulletStartPos;
@@ -121,7 +121,7 @@ public class turret : MonoBehaviour
     {
         if (collision.CompareTag(enemyTag))
         {
-            enemyHP enemy = collision.GetComponent<enemyHP>();
+            MonsterHp enemy = collision.GetComponent<MonsterHp>();
             if (enemy != null && !enemiesInRange.Contains(enemy))
             {
                 enemiesInRange.Add(enemy);
@@ -133,7 +133,7 @@ public class turret : MonoBehaviour
     {
         if (collision.CompareTag(enemyTag))
         {
-            enemyHP enemy = collision.GetComponent<enemyHP>();
+            MonsterHp enemy = collision.GetComponent<MonsterHp>();
             if (enemy != null && enemiesInRange.Contains(enemy))
             {
                 enemiesInRange.Remove(enemy);

@@ -25,7 +25,7 @@ public class MonsterHp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentHP--; 
+        
         if( currentHP <= 0)
         {
             Die();
