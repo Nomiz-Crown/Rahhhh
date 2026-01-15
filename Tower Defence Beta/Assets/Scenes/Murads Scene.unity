@@ -1303,6 +1303,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2113403843}
   m_CullTransparentMesh: 1
+--- !u!4 &2127234797 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7084949934978453596, guid: 9ea0be28c1ef4954ba6d81155cdade39, type: 3}
+  m_PrefabInstance: {fileID: 8479602348012618759}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &702083908471906603
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2084,6 +2089,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WhiteBoy
       objectReference: {fileID: 0}
+    - target: {fileID: 1845723812439511351, guid: 9ea0be28c1ef4954ba6d81155cdade39, type: 3}
+      propertyPath: effectSpawnPoint
+      value: 
+      objectReference: {fileID: 2127234797}
     - target: {fileID: 7084949934978453596, guid: 9ea0be28c1ef4954ba6d81155cdade39, type: 3}
       propertyPath: m_LocalPosition.x
       value: 70
