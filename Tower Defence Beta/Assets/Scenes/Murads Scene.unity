@@ -521,6 +521,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1521599395}
     - target: {fileID: 4229879629138286212, guid: 8eb4a0bb861003b4ab676baaa84bc9a1, type: 3}
+      propertyPath: hpFill
+      value: 
+      objectReference: {fileID: 1892464529}
+    - target: {fileID: 4229879629138286212, guid: 8eb4a0bb861003b4ab676baaa84bc9a1, type: 3}
       propertyPath: BloodEffect
       value: 
       objectReference: {fileID: 2850080011807004739}

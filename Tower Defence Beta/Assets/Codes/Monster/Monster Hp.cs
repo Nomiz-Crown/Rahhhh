@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MonsterHp : MonoBehaviour
 {
-    public int maxHp = 100;
+    public int maxHP = 100;
     public int currentHP;
-
+    public Image  hpFill;
     // Start is called before the first frame update
 
     public GameObject BloodEffect;
@@ -17,13 +18,14 @@ public class MonsterHp : MonoBehaviour
 
     void Start()
     {
-        currentHP = maxHp; 
+        currentHP = maxHP;
+        UpdateHP();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        currentHP--; 
         if( currentHP <= 0)
         {
             Die();
@@ -42,6 +44,12 @@ public class MonsterHp : MonoBehaviour
     public void TakeDamage(int damageAmount)   
     {
         currentHP -= damageAmount;
-      
+        currentHP = Mathf.Clamp(currentHP, 0, maxHP);
+        UpdateHP();
+
+    }
+    void UpdateHP()
+    {
+        hpFill.fillAmount = currentHP / maxHP;
     }
 }
