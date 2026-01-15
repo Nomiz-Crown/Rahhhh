@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class MonsterHp : MonoBehaviour
 {
+    private GameObject healthBarInstance;
+
     public float maxHP = 100;
     private float currentHP;
     public Image  hpFill;
@@ -19,9 +21,19 @@ public class MonsterHp : MonoBehaviour
 
     void Start()
     {
-        GameObject bar = Instantiate(healthBarPrefab, transform.position + offset, Quaternion.identity, transform);
+        healthBarInstance = Instantiate(
+        healthBarPrefab,
+        transform.position + offset,
+        Quaternion.identity,
+        transform
+    );
 
-        Image[] images = bar.GetComponentsInChildren<Image>();
+    healthBarInstance.SetActive(false);
+
+
+        //GameObject bar = Instantiate(healthBarPrefab, transform.position + offset, Quaternion.identity, transform);
+
+        Image[] images = healthBarInstance.GetComponentsInChildren<Image>();
 
         foreach (Image img in images)
         {
@@ -72,4 +84,16 @@ public class MonsterHp : MonoBehaviour
      
       hpFill.fillAmount = (float)currentHP / maxHP;
     }
+    void OnMouseEnter()
+    {
+        if (healthBarInstance != null)
+            healthBarInstance.SetActive(true);
+    }
+
+    void OnMouseExit()
+    {
+        if (healthBarInstance != null)
+            healthBarInstance.SetActive(false);
+    }
+
 }

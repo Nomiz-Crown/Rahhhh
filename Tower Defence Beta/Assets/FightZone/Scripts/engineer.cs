@@ -4,6 +4,7 @@ using System.Collections;
 
 public class Engineer : MonoBehaviour
 {
+    public GameObject Turret;
     public bool isQuestComplete = false;
 
     public static Engineer instance;
@@ -41,6 +42,7 @@ public class Engineer : MonoBehaviour
     public bool playerHasWrench = false;
     void Start()
     {
+        Turret.SetActive(false);
         talkPrompt.gameObject.SetActive(false);
         dialoguePanel.SetActive(false);
 
@@ -142,6 +144,7 @@ public class Engineer : MonoBehaviour
             {
                 Debug.Log("rub m belly, thanksss");
                 isQuestComplete = true; 
+                Turret.SetActive(true);
             }
             else
             {

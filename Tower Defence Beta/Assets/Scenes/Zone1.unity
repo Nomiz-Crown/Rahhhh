@@ -460,7 +460,7 @@ GameObject:
   - component: {fileID: 66659319}
   - component: {fileID: 66659318}
   m_Layer: 5
-  m_Name: Slot1
+  m_Name: TurretIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1861,6 +1861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 034ee0dab6f30be4384a6035652b8e34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Turret: {fileID: 66659316}
   isQuestComplete: 0
   talkPrompt: {fileID: 965672186}
   dialoguePanel: {fileID: 127446980}
@@ -3392,7 +3393,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.08, y: 0.3}
+  m_Size: {x: 0.26, y: 0.3}
   m_EdgeRadius: 0
 --- !u!50 &626128828
 Rigidbody2D:
@@ -11782,6 +11783,7 @@ GameObject:
   - component: {fileID: 1665784728}
   - component: {fileID: 1665784727}
   - component: {fileID: 1665784726}
+  - component: {fileID: 1665784729}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -11863,6 +11865,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 944366847}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1665784729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665784725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56666c5a40171f54783dd416a44f42bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!1 &1684221934
 GameObject:
   m_ObjectHideFlags: 0
