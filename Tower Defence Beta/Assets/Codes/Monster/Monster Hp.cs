@@ -9,15 +9,17 @@ public class MonsterHp : MonoBehaviour
     public int maxHP = 100;
     public int currentHP;
     public Image  hpFill;
-    // Start is called before the first frame update
-
+    public GameObject healthBarPrefab;
+    
     public GameObject BloodEffect;
     public Transform effectSpawnPoint;
-
+    public Vector3 offset = new Vector3(0, 2f, 0);
 
 
     void Start()
     {
+        GameObject bar = Instantiate(healthBarPrefab, transform.position + offset, Quaternion.identity, transform);
+        hpFill = bar.GetComponentInChildren<Image>();
         currentHP = maxHP;
         UpdateHP();
     }
