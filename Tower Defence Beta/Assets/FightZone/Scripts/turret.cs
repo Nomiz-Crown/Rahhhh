@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class turret : MonoBehaviour
 {
-     
+    public GameObject CantPlace;
+    private GameObject rangeIndicator;
+    private bool isSelected = false;
 
 
     private float bulletTimer = 0f;
@@ -31,6 +33,7 @@ public class turret : MonoBehaviour
 
     private void Start()
     {
+        CantPlace.SetActive(false);
         if (bullet != null)
         {
             bulletStartPos = bullet.position;
@@ -40,9 +43,13 @@ public class turret : MonoBehaviour
     }
     void Update()
     {
+        if(isPlacing){
+            CantPlace.SetActive(true);
+        }
         // Handle turret placement
         if (isPlacing && turretInstance != null && Engineer.instance.isQuestComplete == true)
         {
+            
             Vector3 mousePos = Input.mousePosition;
             mousePos.z = 10f;
             turretInstance.transform.position = Camera.main.ScreenToWorldPoint(mousePos);
@@ -50,8 +57,9 @@ public class turret : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 isPlacing = false;
+                rangeIndicator.SetActive(false);
                 turretInstance = null;
-                
+                CantPlace.SetActive(false);
 
             }
         }
@@ -113,7 +121,11 @@ public class turret : MonoBehaviour
         if (!isPlacing)
         {
             turretInstance = Instantiate(turretPrefab);
-            isPlacing = true;
+            rangeIndicator = turretInstance.transform.Find("Range")?.gameObject;
+            if (rangeIndicator!= null){
+                rangeIndicator.SetActive(true);
+                isPlacing = true;
+            }
         }
     }
 
@@ -146,5 +158,13 @@ public class turret : MonoBehaviour
         canAttack = false;
         yield return new WaitForSeconds(attackCooldown);
         canAttack = true;
+    }
+
+    void OnMouseDown(){
+        if(isPlacing) return;
+
+        isSelected = !isSelected;
+
+        rangeIndicator.SetActive(isSelected);
     }
 }
