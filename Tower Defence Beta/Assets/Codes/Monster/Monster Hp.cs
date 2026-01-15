@@ -6,11 +6,13 @@ using UnityEngine;
 public class MonsterHp : MonoBehaviour
 {
     public int maxHp = 100;
-    private int currentHP;
+    public int currentHP;
     // Start is called before the first frame update
 
     public GameObject BloodEffect;
     public Transform effectSpawnPoint;
+
+
 
     void Start()
     {
