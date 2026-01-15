@@ -2,21 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MonsterHp : MonoBehaviour
 {
-    public int maxHp = 100;
-    public int currentHP;
-    // Start is called before the first frame update
+    public float maxHP = 100;
+    private float currentHP;
+    public Image  hpFill;
+    public GameObject healthBarPrefab;
 
+    
     public GameObject BloodEffect;
     public Transform effectSpawnPoint;
-
+    public Vector3 offset = new Vector3(0, 2f, 0);
 
 
     void Start()
     {
-        currentHP = maxHp; 
+        GameObject bar = Instantiate(healthBarPrefab, transform.position + offset, Quaternion.identity, transform);
+
+        Image[] images = bar.GetComponentsInChildren<Image>();
+
+        foreach (Image img in images)
+        {
+            if (img.type == Image.Type.Filled)
+            {
+                hpFill = img;
+                break;
+            }
+        }
+
+        if (hpFill == null)
+        {
+            Debug.LogError("HP FILL NOT FOUND!");
+            return;
+        }
+        currentHP = maxHP;
+        UpdateHP();
     }
 
     // Update is called once per frame
@@ -41,6 +63,13 @@ public class MonsterHp : MonoBehaviour
     public void TakeDamage(int damageAmount)   
     {
         currentHP -= damageAmount;
-      
+        currentHP = Mathf.Clamp(currentHP, 0, maxHP);
+        UpdateHP();
+
+    }
+    void UpdateHP()
+    {
+     
+      hpFill.fillAmount = (float)currentHP / maxHP;
     }
 }
