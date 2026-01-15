@@ -7,6 +7,7 @@ public class MonsterHp : MonoBehaviour
 {
     public int maxHp = 100;
     public int currentHP;
+
     // Start is called before the first frame update
 
     public GameObject BloodEffect;
