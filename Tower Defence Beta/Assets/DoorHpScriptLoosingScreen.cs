@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class DoorHpForLoosingScene : MonoBehaviour
+public class DoorHpScriptLoosingScreen : MonoBehaviour
 {
     public int DoorMaxHp = 1000;
     public int DoorCurrentHp;
@@ -17,10 +17,5 @@ public class DoorHpForLoosingScene : MonoBehaviour
     public void takeDamage(int attack)
     {
         DoorCurrentHp -= attack;
-    }
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }
