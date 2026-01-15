@@ -73,16 +73,16 @@ public class TrackLock : MonoBehaviour
 
 
         // Lock everything
-        SetSquare(square_0_0, true);  //set tilll false efter playtest brosky
-        SetSquare(square_0_1, true);
-        SetSquare(square_0_2, true);
+        SetSquare(square_0_0, false);  //set tilll false efter playtest brosky
+        SetSquare(square_0_1, false);
+        SetSquare(square_0_2, false);
 
-        SetSquare(square_1_0, true);
-        SetSquare(square_1_1, true);
-        SetSquare(square_1_2, true);
+        SetSquare(square_1_0, false);
+        SetSquare(square_1_1, false);
+        SetSquare(square_1_2, false);
 
-        SetSquare(square_2_0, true);
-        SetSquare(square_2_2, true);
+        SetSquare(square_2_0, false);
+        SetSquare(square_2_2, false);
 
         // Start square is always open
         SetSquare(square_2_1, true);
@@ -125,30 +125,7 @@ public class TrackLock : MonoBehaviour
     }
 #endif
 
-    private IEnumerator MoveAlongPath(GameObject moverObj, List<GameObject> path)
-    {
-        foreach (var waypoint in path)
-        {
-            Vector3 startPos = moverObj.transform.position;
-            Vector3 endPos = waypoint.transform.position;
-
-            float distance = Vector3.Distance(startPos, endPos);
-            float travelTime = distance / moveSpeed;
-            float elapsed = 0f;
-
-            while (elapsed < travelTime)
-            {
-                moverObj.transform.position = Vector3.Lerp(startPos, endPos, elapsed / travelTime);
-                elapsed += Time.deltaTime;
-                yield return null;
-            }
-
-            moverObj.transform.position = endPos;
-        }
-
-       // Destroy(moverObj); // Optional: remove clone after finishing path
-    }
-
+    
     private void SpawnClone()
     {
         if (mover == null) return;
@@ -190,7 +167,12 @@ public class TrackLock : MonoBehaviour
         GameObject moverClone = Instantiate(mover, chosenPath[0].transform.position, mover.transform.rotation);
 
         // Start moving the clone along the chosen path
-        StartCoroutine(MoveAlongPath(moverClone, chosenPath));
+        EnemyMover moverScript = moverClone.GetComponent<EnemyMover>();
+        if (moverScript != null)
+        {
+            //moverScript.MoveAlongPath(chosenPath);
+        }
+
     }
 
     private IEnumerator SpawnClonesContinuously()
