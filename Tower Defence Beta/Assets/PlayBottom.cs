@@ -4,20 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement; 
 public class PlayBottom : MonoBehaviour
 {
-
   public void PlayGame()
     {
-        Invoke(nameof(DelayedPlay), 1.5f);
-
-       
-        
+        SceneManager.LoadSceneAsync(1);     
     }
-    void DelayedPlay()
-    {
-        // Transition code (example: load scene)
-        SceneManager.LoadScene(1);
-    }
-    public void QuitGame()
+  public void QuitGame()
     {
         Application.Quit();
     }
