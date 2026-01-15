@@ -6,10 +6,11 @@ using UnityEngine.UI;
 
 public class MonsterHp : MonoBehaviour
 {
-    public int maxHP = 100;
-    public int currentHP;
+    public float maxHP = 100;
+    private float currentHP;
     public Image  hpFill;
     public GameObject healthBarPrefab;
+
     
     public GameObject BloodEffect;
     public Transform effectSpawnPoint;
@@ -19,7 +20,23 @@ public class MonsterHp : MonoBehaviour
     void Start()
     {
         GameObject bar = Instantiate(healthBarPrefab, transform.position + offset, Quaternion.identity, transform);
-        hpFill = bar.GetComponentInChildren<Image>();
+
+        Image[] images = bar.GetComponentsInChildren<Image>();
+
+        foreach (Image img in images)
+        {
+            if (img.type == Image.Type.Filled)
+            {
+                hpFill = img;
+                break;
+            }
+        }
+
+        if (hpFill == null)
+        {
+            Debug.LogError("HP FILL NOT FOUND!");
+            return;
+        }
         currentHP = maxHP;
         UpdateHP();
     }
@@ -52,6 +69,7 @@ public class MonsterHp : MonoBehaviour
     }
     void UpdateHP()
     {
-        hpFill.fillAmount = currentHP / maxHP;
+     
+      hpFill.fillAmount = (float)currentHP / maxHP;
     }
 }
