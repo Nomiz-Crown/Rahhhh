@@ -3541,7 +3541,7 @@ MonoBehaviour:
   hpFill: {fileID: 0}
   healthBarPrefab: {fileID: 4172939497355627284, guid: 5bf81384933c12a4c9e58f023d00500f, type: 3}
   BloodEffect: {fileID: 6199420458479475172, guid: b7b265b7d66110443b70b8127162da90, type: 3}
-  effectSpawnPoint: {fileID: 0}
+  effectSpawnPoint: {fileID: 626128826}
   offset: {x: 0, y: 2, z: 0}
 --- !u!114 &626128832
 MonoBehaviour:
