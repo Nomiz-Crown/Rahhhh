@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,14 +14,16 @@ public class MonsterHp : MonoBehaviour
     public Image  hpFill;
     public GameObject healthBarPrefab;
 
-    
+    public int goldDrop = 5;
+    private Gold goldManager;
+
     public GameObject BloodEffect;
     public Transform effectSpawnPoint;
     public Vector3 offset = new Vector3(0, 2f, 0);
 
-
     void Start()
     {
+        goldManager = FindObjectOfType<Gold>();
         healthBarInstance = Instantiate(
         healthBarPrefab,
         transform.position + offset,
@@ -66,6 +69,10 @@ public class MonsterHp : MonoBehaviour
     }
     private void Die()
     {
+        if (goldManager != null)
+        {
+            goldManager.AddGold(goldDrop);
+        }
         if (BloodEffect != null && effectSpawnPoint != null)
         {
             GameObject effect = Instantiate(BloodEffect, effectSpawnPoint.position, effectSpawnPoint.rotation);
