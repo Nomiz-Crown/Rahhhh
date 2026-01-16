@@ -1892,10 +1892,11 @@ Transform:
   m_GameObject: {fileID: 339130767}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 123.591545, y: -106, z: 0}
+  m_LocalPosition: {x: 123, y: -106, z: 0}
   m_LocalScale: {x: 7.81, y: 7.81, z: 7.81}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 1226540340}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &339130771
@@ -1961,6 +1962,7 @@ MonoBehaviour:
   - Rub My Belly
   dialogue_WithWrench:
   - 'Here is my wrench, thanks for rubbing my belly '
+  - I will head up now, thanks!!!
   isTalking: 0
   playerHasWrench: 0
 --- !u!1 &351464771
@@ -3540,6 +3542,7 @@ MonoBehaviour:
   maxHP: 100
   hpFill: {fileID: 0}
   healthBarPrefab: {fileID: 4172939497355627284, guid: 5bf81384933c12a4c9e58f023d00500f, type: 3}
+  goldDrop: 10
   BloodEffect: {fileID: 6199420458479475172, guid: b7b265b7d66110443b70b8127162da90, type: 3}
   effectSpawnPoint: {fileID: 626128826}
   offset: {x: 0, y: 2, z: 0}
@@ -6325,6 +6328,67 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &1015552205
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3689530673484252051, guid: f440164864aa028459907a3fdcc5f369, type: 3}
+      propertyPath: goldDrop
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418297935843808257, guid: f440164864aa028459907a3fdcc5f369, type: 3}
+      propertyPath: m_Name
+      value: MeatballWalking_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428837339015654859, guid: f440164864aa028459907a3fdcc5f369, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428837339015654859, guid: f440164864aa028459907a3fdcc5f369, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428837339015654859, guid: f440164864aa028459907a3fdcc5f369, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428837339015654859, guid: f440164864aa028459907a3fdcc5f369, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428837339015654859, guid: f440164864aa028459907a3fdcc5f369, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428837339015654859, guid: f440164864aa028459907a3fdcc5f369, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428837339015654859, guid: f440164864aa028459907a3fdcc5f369, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428837339015654859, guid: f440164864aa028459907a3fdcc5f369, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428837339015654859, guid: f440164864aa028459907a3fdcc5f369, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428837339015654859, guid: f440164864aa028459907a3fdcc5f369, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f440164864aa028459907a3fdcc5f369, type: 3}
 --- !u!4 &1032389538 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2104627756273481813, guid: 67ac994bb444b2141b90afd44fa250d1, type: 3}
@@ -8772,12 +8836,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1226540337}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 123.58556, y: -103.855774, z: 0}
-  m_LocalScale: {x: 3.2097, y: 3.2097, z: 3.2097}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.25608194, z: 0}
+  m_LocalScale: {x: 0.4109731, y: 0.4109731, z: 0.4109731}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 339130770}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1238366887
 GameObject:
@@ -9518,6 +9582,10 @@ PrefabInstance:
       propertyPath: effectSpawnPoint
       value: 
       objectReference: {fileID: 1330180187}
+    - target: {fileID: 1381098039674784400, guid: b9e4840ef3ac67749851b6340620af80, type: 3}
+      propertyPath: goldDrop
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 2456129959560316648, guid: b9e4840ef3ac67749851b6340620af80, type: 3}
       propertyPath: m_LocalPosition.x
       value: 20.148626
@@ -13683,6 +13751,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6742401403339610857, guid: 9ea0be28c1ef4954ba6d81155cdade39, type: 3}
+      propertyPath: goldDrop
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7084949934978453596, guid: 9ea0be28c1ef4954ba6d81155cdade39, type: 3}
       propertyPath: m_LocalPosition.x
       value: 23.532923
@@ -13947,7 +14019,7 @@ Transform:
   m_GameObject: {fileID: 1760713197}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 128.10507, y: -104.79739, z: -2.1688964}
+  m_LocalPosition: {x: 118, y: -116, z: -2.1688964}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15892,7 +15964,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 88.795654, y: 0, z: 73.0907, w: 0}
+  m_margin: {x: 77.23694, y: 0, z: 30.836914, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -16558,7 +16630,6 @@ SceneRoots:
   - {fileID: 1420251902}
   - {fileID: 424043239}
   - {fileID: 581049586}
-  - {fileID: 1226540340}
   - {fileID: 339130770}
   - {fileID: 872395822}
   - {fileID: 1042473272}
@@ -16596,3 +16667,4 @@ SceneRoots:
   - {fileID: 1693637164}
   - {fileID: 1330180186}
   - {fileID: 1750668021}
+  - {fileID: 1015552205}
