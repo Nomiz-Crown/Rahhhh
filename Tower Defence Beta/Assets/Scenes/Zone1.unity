@@ -3521,9 +3521,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9885838600c374a44b0f28685a1683a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attack: 20
+  attack: 10
   waitSecBeforeAttack: 1.5
-  attackEffectPrefab: {fileID: 5110737738182548234, guid: c181df076012d4140b2584e4d985086a, type: 3}
+  attackEffectPrefab: {fileID: 4984953398023913079, guid: cc09d0017166a5148b17aed08ddd5365, type: 3}
   effectSpawnPoint: {fileID: 626128826}
 --- !u!114 &626128831
 MonoBehaviour:
@@ -9511,6 +9511,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1287199328639635669, guid: b9e4840ef3ac67749851b6340620af80, type: 3}
+      propertyPath: attack
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1287199328639635669, guid: b9e4840ef3ac67749851b6340620af80, type: 3}
       propertyPath: effectSpawnPoint
       value: 
       objectReference: {fileID: 1330180187}
@@ -13662,6 +13666,10 @@ PrefabInstance:
     - target: {fileID: 1674211537896434873, guid: 9ea0be28c1ef4954ba6d81155cdade39, type: 3}
       propertyPath: m_TagString
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845723812439511351, guid: 9ea0be28c1ef4954ba6d81155cdade39, type: 3}
+      propertyPath: attack
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1845723812439511351, guid: 9ea0be28c1ef4954ba6d81155cdade39, type: 3}
       propertyPath: effectSpawnPoint

@@ -145,6 +145,8 @@ public class Engineer : MonoBehaviour
                 Debug.Log("rub m belly, thanksss");
                 isQuestComplete = true; 
                 Turret.SetActive(true);
+
+            transform.position = new Vector2(-116, 5f);
             }
             else
             {
