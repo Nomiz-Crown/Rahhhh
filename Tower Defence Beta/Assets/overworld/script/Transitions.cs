@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Transitions : MonoBehaviour
 {
+    public lock TrackLock;
+
     [Header("UI")]
     public GameObject transition;
     public List<Sprite> frames = new List<Sprite>();
