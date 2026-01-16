@@ -4,12 +4,26 @@ using UnityEngine;
 
 public class WrenchPickUp : MonoBehaviour
 {
-    void OnTriggerStay2D(Collider2D other)
+    private bool playerInRange = false;
+
+    void Update()
     {
-        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.E)) 
+        if(playerInRange && Input.GetKeyDown(KeyCode.E))
         {
             Engineer.instance.playerHasWrench = true;
             Destroy(gameObject);
         }
     }
+
+    void OnTriggerEnter2D(Collider2D other){
+        if(other.CompareTag("Player"))
+          playerInRange = true;
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if(other.CompareTag("Player"))
+           playerInRange = false;
+    }
 }
+
