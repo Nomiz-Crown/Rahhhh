@@ -5,6 +5,10 @@ using System.Collections.Generic;
 
 public class TrackLock : MonoBehaviour
 {
+    public key keyScript;
+
+    public bool endWave = false;
+
     [System.Serializable]
     public class EnemyEntry
     {
@@ -131,19 +135,26 @@ public class TrackLock : MonoBehaviour
         yield return new WaitUntil(() => activeEnemies.TrueForAll(e => e == null));
 
         Debug.Log($"Wave {wave.waveName} cleared!");
+        endWave = true;
+        
+    }
 
-        // Wait before next wave
-        yield return new WaitForSeconds(timeBetweenWaves);
- 
-        // Start next wave if available
-        currentWaveIndex++;
-        if (currentWaveIndex < waves.Count)
+    public void TryOpenSquare(TrackSquare square)
+    {
+        if (!endWave) return;
+        if (keyScript == null || !keyScript.keyCollected) return;
+
+        SetSquare(square, true);
+    }
+    public void StartNextWaveManual()
+    {
+        // Make sure we have a next wave
+        if (currentWaveIndex + 1 < waves.Count)
         {
+            currentWaveIndex++;
             StartCoroutine(StartWave(waves[currentWaveIndex]));
         }
-        else
-        {
-            Debug.Log("All waves completed!");
-        }
     }
+
+
 }

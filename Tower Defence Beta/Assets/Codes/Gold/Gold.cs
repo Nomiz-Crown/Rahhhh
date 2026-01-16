@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 public class Gold : MonoBehaviour
 {
-    public int GoldCoinHave = 0;
+    public int GoldCoinHave = 100;
     public Sprite GoldCoin;
     public TextMeshProUGUI goldText;
     // Start is called before the first frame update

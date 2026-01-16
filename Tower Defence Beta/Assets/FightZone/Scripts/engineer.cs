@@ -4,6 +4,8 @@ using System.Collections;
 
 public class Engineer : MonoBehaviour
 {
+    public GameObject orng;
+
     public GameObject Turret;
     public bool isQuestComplete = false;
 
@@ -145,6 +147,7 @@ public class Engineer : MonoBehaviour
                 Debug.Log("rub m belly, thanksss");
                 isQuestComplete = true; 
                 Turret.SetActive(true);
+                orng.SetActive(true);
 
             transform.position = new Vector2(-116, 5f);
             }

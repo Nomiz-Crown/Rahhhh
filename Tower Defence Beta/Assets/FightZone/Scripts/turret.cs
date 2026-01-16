@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class turret : MonoBehaviour
 {
+    public GameObject orngg;
+    public int dmg = 25;
+
     private bool isPlaced = true;
 
     public GameObject CantPlace;
@@ -68,6 +71,7 @@ public class turret : MonoBehaviour
             }
         } 
         if(isPlacing){
+            orngg.SetActive(false);
             CantPlace.SetActive(true);
         }
         // Handle turret placement
@@ -129,7 +133,7 @@ public class turret : MonoBehaviour
             if (Vector3.Distance(bullet.position, bulletTarget.position) < 0.1f)
             {
                 // Damage enemy
-                bulletTarget.GetComponent<MonsterHp>()?.TakeDamage(25);
+                bulletTarget.GetComponent<MonsterHp>()?.TakeDamage(dmg);
 
                 // Reset bullet
                 bullet.position = bulletStartPos;
