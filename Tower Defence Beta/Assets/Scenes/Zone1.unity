@@ -3410,7 +3410,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 5
   m_Sprite: {fileID: -1588291654, guid: 2107a121d02dbf04d9305ce6da6e3e66, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -8752,7 +8752,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 20
   m_Sprite: {fileID: 183670249, guid: 7d580f5171377e948905e51ea649ce58, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -9506,6 +9506,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 580415275953637273, guid: b9e4840ef3ac67749851b6340620af80, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1287199328639635669, guid: b9e4840ef3ac67749851b6340620af80, type: 3}
       propertyPath: effectSpawnPoint
       value: 
@@ -12519,11 +12523,11 @@ MonoBehaviour:
   - waveName: 1
     enemies:
     - enemyPrefab: {fileID: 626128823}
-      amount: 1
+      amount: 0
     - enemyPrefab: {fileID: 1803070015}
-      amount: 1
+      amount: 3
     - enemyPrefab: {fileID: 1629602928}
-      amount: 1
+      amount: 5
   spawnPoint: {fileID: 1818681266}
   spawnInterval: 2
   timeBetweenWaves: 10
@@ -13666,6 +13670,10 @@ PrefabInstance:
     - target: {fileID: 4714038703066315690, guid: 9ea0be28c1ef4954ba6d81155cdade39, type: 3}
       propertyPath: baseSpeed
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6149202075823549442, guid: 9ea0be28c1ef4954ba6d81155cdade39, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7084949934978453596, guid: 9ea0be28c1ef4954ba6d81155cdade39, type: 3}
       propertyPath: m_LocalPosition.x
