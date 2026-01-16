@@ -3344,7 +3344,8 @@ GameObject:
   - component: {fileID: 626128830}
   - component: {fileID: 626128831}
   - component: {fileID: 626128832}
-  m_Layer: 0
+  - component: {fileID: 626128833}
+  m_Layer: 7
   m_Name: enemy-Sheet_0
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -3543,7 +3544,7 @@ MonoBehaviour:
   hpFill: {fileID: 0}
   healthBarPrefab: {fileID: 4172939497355627284, guid: 5bf81384933c12a4c9e58f023d00500f, type: 3}
   goldDrop: 10
-  BloodEffect: {fileID: 6199420458479475172, guid: b7b265b7d66110443b70b8127162da90, type: 3}
+  BloodEffect: {fileID: 7749224595301073942, guid: c8dd7429cdf7c794e92482109f072822, type: 3}
   effectSpawnPoint: {fileID: 626128826}
   offset: {x: 0, y: 2, z: 0}
 --- !u!114 &626128832
@@ -3638,6 +3639,41 @@ MonoBehaviour:
   - {fileID: 1071309603}
   - {fileID: 297098686}
   - {fileID: 1285726794}
+--- !u!70 &626128833
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626128823}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.14, y: 0.27}
+  m_Direction: 0
 --- !u!1 &655649536
 GameObject:
   m_ObjectHideFlags: 0
@@ -5828,7 +5864,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -2.3865232}
+  m_Offset: {x: 0, y: -2.9035552}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -5839,7 +5875,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.12, y: 0.3469534}
+  m_Size: {x: 5.12, y: 1.3810172}
   m_EdgeRadius: 0
 --- !u!61 &949290099
 BoxCollider2D:
@@ -6345,12 +6381,24 @@ PrefabInstance:
       value: MeatballWalking_0
       objectReference: {fileID: 0}
     - target: {fileID: 5428837339015654859, guid: f440164864aa028459907a3fdcc5f369, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428837339015654859, guid: f440164864aa028459907a3fdcc5f369, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428837339015654859, guid: f440164864aa028459907a3fdcc5f369, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428837339015654859, guid: f440164864aa028459907a3fdcc5f369, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30
+      value: 8.8
       objectReference: {fileID: 0}
     - target: {fileID: 5428837339015654859, guid: f440164864aa028459907a3fdcc5f369, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -93
+      value: -76.3
       objectReference: {fileID: 0}
     - target: {fileID: 5428837339015654859, guid: f440164864aa028459907a3fdcc5f369, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6383,6 +6431,10 @@ PrefabInstance:
     - target: {fileID: 5428837339015654859, guid: f440164864aa028459907a3fdcc5f369, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428837339015654859, guid: f440164864aa028459907a3fdcc5f369, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9631,6 +9683,10 @@ PrefabInstance:
       value: WormEnemySprite-Sheet_0
       objectReference: {fileID: 0}
     - target: {fileID: 2713859576203380990, guid: b9e4840ef3ac67749851b6340620af80, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2713859576203380990, guid: b9e4840ef3ac67749851b6340620af80, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -9876,6 +9932,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2713859576203380990, guid: b9e4840ef3ac67749851b6340620af80, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1803070021}
+    - targetCorrespondingSourceObject: {fileID: 2713859576203380990, guid: b9e4840ef3ac67749851b6340620af80, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1803070028}
   m_SourcePrefab: {fileID: 100100000, guid: b9e4840ef3ac67749851b6340620af80, type: 3}
 --- !u!4 &1330180187 stripped
 Transform:
@@ -13732,6 +13791,10 @@ PrefabInstance:
       value: WhiteBoy
       objectReference: {fileID: 0}
     - target: {fileID: 1674211537896434873, guid: 9ea0be28c1ef4954ba6d81155cdade39, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1674211537896434873, guid: 9ea0be28c1ef4954ba6d81155cdade39, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -13755,6 +13818,10 @@ PrefabInstance:
       propertyPath: goldDrop
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6742401403339610857, guid: 9ea0be28c1ef4954ba6d81155cdade39, type: 3}
+      propertyPath: BloodEffect
+      value: 
+      objectReference: {fileID: 7842897875354138434, guid: 6dfadca331368eb4ab920ddf3e7735dd, type: 3}
     - target: {fileID: 7084949934978453596, guid: 9ea0be28c1ef4954ba6d81155cdade39, type: 3}
       propertyPath: m_LocalPosition.x
       value: 23.532923
@@ -13808,6 +13875,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1674211537896434873, guid: 9ea0be28c1ef4954ba6d81155cdade39, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1750668030}
+    - targetCorrespondingSourceObject: {fileID: 1674211537896434873, guid: 9ea0be28c1ef4954ba6d81155cdade39, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1750668031}
   m_SourcePrefab: {fileID: 100100000, guid: 9ea0be28c1ef4954ba6d81155cdade39, type: 3}
 --- !u!4 &1750668022 stripped
 Transform:
@@ -13978,6 +14048,41 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.38, y: 0.45}
   m_EdgeRadius: 0
+--- !u!70 &1750668031
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1629602928}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.14, y: 0.0001}
+  m_Direction: 0
 --- !u!1 &1760713197
 GameObject:
   m_ObjectHideFlags: 0
@@ -14272,6 +14377,41 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!70 &1803070028
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803070015}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.03}
+  m_Size: {x: 0.03, y: 0.12}
+  m_Direction: 0
 --- !u!1001 &1818681236
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16562,11 +16702,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8485055614756587888, guid: 18215c5d0161b304ca5526370e1e54b6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 130
+      value: 139.23
       objectReference: {fileID: 0}
     - target: {fileID: 8485055614756587888, guid: 18215c5d0161b304ca5526370e1e54b6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -105
+      value: -86.28
       objectReference: {fileID: 0}
     - target: {fileID: 8485055614756587888, guid: 18215c5d0161b304ca5526370e1e54b6, type: 3}
       propertyPath: m_LocalPosition.z
