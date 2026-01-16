@@ -17142,7 +17142,7 @@ MonoBehaviour:
   Gold: {fileID: 1760713198}
   Mana: {fileID: 1656559787}
   orngg: {fileID: 824386616}
-  dmg: 1
+  dmg: 2
   CantPlace: {fileID: 855188034}
   bullet: {fileID: 1769930331}
   bulletSpeed: 20
