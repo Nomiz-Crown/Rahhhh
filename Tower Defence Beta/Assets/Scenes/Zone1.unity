@@ -3544,7 +3544,7 @@ MonoBehaviour:
   hpFill: {fileID: 0}
   healthBarPrefab: {fileID: 4172939497355627284, guid: 5bf81384933c12a4c9e58f023d00500f, type: 3}
   goldDrop: 10
-  BloodEffect: {fileID: 6199420458479475172, guid: b7b265b7d66110443b70b8127162da90, type: 3}
+  BloodEffect: {fileID: 7749224595301073942, guid: c8dd7429cdf7c794e92482109f072822, type: 3}
   effectSpawnPoint: {fileID: 626128826}
   offset: {x: 0, y: 2, z: 0}
 --- !u!114 &626128832
@@ -13818,6 +13818,10 @@ PrefabInstance:
       propertyPath: goldDrop
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6742401403339610857, guid: 9ea0be28c1ef4954ba6d81155cdade39, type: 3}
+      propertyPath: BloodEffect
+      value: 
+      objectReference: {fileID: 7842897875354138434, guid: 6dfadca331368eb4ab920ddf3e7735dd, type: 3}
     - target: {fileID: 7084949934978453596, guid: 9ea0be28c1ef4954ba6d81155cdade39, type: 3}
       propertyPath: m_LocalPosition.x
       value: 23.532923
