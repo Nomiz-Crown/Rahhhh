@@ -488,6 +488,7 @@ MonoBehaviour:
   maxHP: 50
   hpFill: {fileID: 0}
   healthBarPrefab: {fileID: 4172939497355627284, guid: 5bf81384933c12a4c9e58f023d00500f, type: 3}
+  goldDrop: 5
   BloodEffect: {fileID: 6199420458479475172, guid: b7b265b7d66110443b70b8127162da90, type: 3}
   effectSpawnPoint: {fileID: 194570267}
   offset: {x: 0, y: 2, z: 0}
@@ -720,6 +721,7 @@ MonoBehaviour:
   maxHP: 50
   hpFill: {fileID: 0}
   healthBarPrefab: {fileID: 4172939497355627284, guid: 5bf81384933c12a4c9e58f023d00500f, type: 3}
+  goldDrop: 5
   BloodEffect: {fileID: 6199420458479475172, guid: b7b265b7d66110443b70b8127162da90, type: 3}
   effectSpawnPoint: {fileID: 251137010}
   offset: {x: 0, y: 2, z: 0}
@@ -1425,6 +1427,7 @@ MonoBehaviour:
   maxHP: 50
   hpFill: {fileID: 0}
   healthBarPrefab: {fileID: 4172939497355627284, guid: 5bf81384933c12a4c9e58f023d00500f, type: 3}
+  goldDrop: 5
   BloodEffect: {fileID: 6199420458479475172, guid: b7b265b7d66110443b70b8127162da90, type: 3}
   effectSpawnPoint: {fileID: 552794219}
   offset: {x: 0, y: 2, z: 0}
@@ -1636,6 +1639,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c871096bfcb7f3e4ca0ffb76d0ac0cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Cost: 100
+  isOriginal: 0
+  trackLock: {fileID: 0}
+  Gold: {fileID: 0}
+  Mana: {fileID: 0}
+  orngg: {fileID: 0}
+  dmg: 25
+  CantPlace: {fileID: 0}
   bullet: {fileID: 2006509984}
   bulletSpeed: 10
   turretPrefab: {fileID: 762448291}
@@ -1818,6 +1829,7 @@ MonoBehaviour:
   maxHP: 50
   hpFill: {fileID: 0}
   healthBarPrefab: {fileID: 4172939497355627284, guid: 5bf81384933c12a4c9e58f023d00500f, type: 3}
+  goldDrop: 5
   BloodEffect: {fileID: 6199420458479475172, guid: b7b265b7d66110443b70b8127162da90, type: 3}
   effectSpawnPoint: {fileID: 975808601}
   offset: {x: 0, y: 2, z: 0}
@@ -1997,6 +2009,107 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1159182525 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8983407359940069874, guid: 14bfa5d0265dc3a40b4ac6a10f42efe5, type: 3}
+  m_PrefabInstance: {fileID: 1447405252}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1159182526
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159182525}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: c8a3692f9fbec284780dad1063d11e9d, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1192768190
 GameObject:
   m_ObjectHideFlags: 0
@@ -2045,6 +2158,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c871096bfcb7f3e4ca0ffb76d0ac0cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Cost: 100
+  isOriginal: 0
+  trackLock: {fileID: 0}
+  Gold: {fileID: 0}
+  Mana: {fileID: 0}
+  orngg: {fileID: 0}
+  dmg: 25
+  CantPlace: {fileID: 0}
   bullet: {fileID: 1299430451}
   bulletSpeed: 10
   turretPrefab: {fileID: 1192768190}
@@ -2295,6 +2416,7 @@ MonoBehaviour:
   maxHP: 50
   hpFill: {fileID: 0}
   healthBarPrefab: {fileID: 4172939497355627284, guid: 5bf81384933c12a4c9e58f023d00500f, type: 3}
+  goldDrop: 5
   BloodEffect: {fileID: 6199420458479475172, guid: b7b265b7d66110443b70b8127162da90, type: 3}
   effectSpawnPoint: {fileID: 1318678421}
   offset: {x: 0, y: 2, z: 0}
@@ -2527,6 +2649,7 @@ MonoBehaviour:
   maxHP: 50
   hpFill: {fileID: 0}
   healthBarPrefab: {fileID: 4172939497355627284, guid: 5bf81384933c12a4c9e58f023d00500f, type: 3}
+  goldDrop: 5
   BloodEffect: {fileID: 6199420458479475172, guid: b7b265b7d66110443b70b8127162da90, type: 3}
   effectSpawnPoint: {fileID: 1386008379}
   offset: {x: 0, y: 2, z: 0}
@@ -2738,6 +2861,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c871096bfcb7f3e4ca0ffb76d0ac0cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Cost: 100
+  isOriginal: 0
+  trackLock: {fileID: 0}
+  Gold: {fileID: 0}
+  Mana: {fileID: 0}
+  orngg: {fileID: 0}
+  dmg: 25
+  CantPlace: {fileID: 0}
   bullet: {fileID: 165313880}
   bulletSpeed: 10
   turretPrefab: {fileID: 1415768654}
@@ -3082,7 +3213,10 @@ PrefabInstance:
     - {fileID: 1512700959846847993, guid: 14bfa5d0265dc3a40b4ac6a10f42efe5, type: 3}
     - {fileID: 7124784097958263938, guid: 14bfa5d0265dc3a40b4ac6a10f42efe5, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8983407359940069874, guid: 14bfa5d0265dc3a40b4ac6a10f42efe5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1159182526}
   m_SourcePrefab: {fileID: 100100000, guid: 14bfa5d0265dc3a40b4ac6a10f42efe5, type: 3}
 --- !u!1 &1534424288
 GameObject:
@@ -3404,6 +3538,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c871096bfcb7f3e4ca0ffb76d0ac0cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Cost: 100
+  isOriginal: 0
+  trackLock: {fileID: 0}
+  Gold: {fileID: 0}
+  Mana: {fileID: 0}
+  orngg: {fileID: 0}
+  dmg: 25
+  CantPlace: {fileID: 0}
   bullet: {fileID: 451148784}
   bulletSpeed: 10
   turretPrefab: {fileID: 1634078624}
@@ -3682,6 +3824,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c871096bfcb7f3e4ca0ffb76d0ac0cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Cost: 100
+  isOriginal: 0
+  trackLock: {fileID: 0}
+  Gold: {fileID: 0}
+  Mana: {fileID: 0}
+  orngg: {fileID: 0}
+  dmg: 25
+  CantPlace: {fileID: 0}
   bullet: {fileID: 120989232}
   bulletSpeed: 10
   turretPrefab: {fileID: 1679939610}
@@ -3888,6 +4038,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c871096bfcb7f3e4ca0ffb76d0ac0cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Cost: 100
+  isOriginal: 0
+  trackLock: {fileID: 0}
+  Gold: {fileID: 0}
+  Mana: {fileID: 0}
+  orngg: {fileID: 0}
+  dmg: 25
+  CantPlace: {fileID: 0}
   bullet: {fileID: 458836366}
   bulletSpeed: 10
   turretPrefab: {fileID: 1831559255}
