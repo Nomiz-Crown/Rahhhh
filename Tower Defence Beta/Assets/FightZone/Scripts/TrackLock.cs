@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 public class TrackLock : MonoBehaviour
 {
+    public Gold gold;
+
     public key keyScript;
 
     public bool endWave = false;
@@ -59,6 +61,10 @@ public class TrackLock : MonoBehaviour
 
     void Start()
     {
+        endWave = false;
+        Debug.Log(endWave);
+        keyScript.started = true;
+
         StartCoroutine(StartWave(waves[currentWaveIndex]));
         // Lock everything
         SetSquare(square_0_0, false);
@@ -75,6 +81,7 @@ public class TrackLock : MonoBehaviour
         // Start square is always open
         SetSquare(square_2_1, true);
 
+        
         // Start spawning clones
     }
 
@@ -136,6 +143,7 @@ public class TrackLock : MonoBehaviour
 
         Debug.Log($"Wave {wave.waveName} cleared!");
         endWave = true;
+        gold.AddGold(20 * (currentWaveIndex + 1));
         
     }
 

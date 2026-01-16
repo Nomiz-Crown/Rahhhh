@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class key : MonoBehaviour
 {
+    public bool started = false;
     public TrackLock trackLock;
     public GameObject keyy;
 
@@ -13,8 +14,9 @@ public class key : MonoBehaviour
     void Update()
     {
         // Spawn the key once when the wave ends
-        if (trackLock != null && trackLock.endWave && !keyCollected && !spawned)
+        if (trackLock != null && trackLock.endWave && !keyCollected && !spawned && started)
         {
+            Debug.Log("endWave: " + trackLock.endWave + " key? " + keyCollected + " started: " + started);
             keyy.SetActive(true);
             spawned = true;
         }

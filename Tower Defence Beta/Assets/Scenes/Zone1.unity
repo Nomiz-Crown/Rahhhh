@@ -265,6 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e87d582bfc25b6468cf05ae6a2a6ac8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trackLock: {fileID: 1656559788}
   transition: {fileID: 1047239857}
   frames:
   - {fileID: 1071543694, guid: d41e83cf893b5f746974cdc31a30209f, type: 3}
@@ -543,7 +544,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &98344408
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1614,6 +1615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fcd00133de54c7469bf0c2f14d76c32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  started: 0
   trackLock: {fileID: 1656559788}
   keyy: {fileID: 1389305479}
   keyCollected: 0
@@ -1796,6 +1798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e87d582bfc25b6468cf05ae6a2a6ac8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trackLock: {fileID: 1656559788}
   transition: {fileID: 1047239857}
   frames:
   - {fileID: 1071543694, guid: d41e83cf893b5f746974cdc31a30209f, type: 3}
@@ -2190,6 +2193,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c871096bfcb7f3e4ca0ffb76d0ac0cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOriginal: 1
+  trackLock: {fileID: 1656559788}
+  Gold: {fileID: 1760713198}
+  Mana: {fileID: 1656559787}
   orngg: {fileID: 824386616}
   dmg: 25
   CantPlace: {fileID: 855188034}
@@ -4010,7 +4017,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &655649537
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4378,7 +4385,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &778255868
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5023,6 +5030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e87d582bfc25b6468cf05ae6a2a6ac8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trackLock: {fileID: 1656559788}
   transition: {fileID: 1047239857}
   frames:
   - {fileID: 1071543694, guid: d41e83cf893b5f746974cdc31a30209f, type: 3}
@@ -5144,8 +5152,8 @@ Transform:
   m_GameObject: {fileID: 839121935}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 127.6, y: -111.810005, z: 0}
-  m_LocalScale: {x: 11.47, y: 1, z: 1}
+  m_LocalPosition: {x: 127.7349, y: -111.810005, z: 0}
+  m_LocalScale: {x: 10.507359, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -11187,7 +11195,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1392667527
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11960,7 +11968,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1472878222
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12213,6 +12221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e87d582bfc25b6468cf05ae6a2a6ac8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trackLock: {fileID: 1656559788}
   transition: {fileID: 1047239857}
   frames:
   - {fileID: 1071543694, guid: d41e83cf893b5f746974cdc31a30209f, type: 3}
@@ -13282,7 +13291,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1656559788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13295,6 +13304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82abb5bc0bb5c5b4e8c3d8af66af5fc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gold: {fileID: 1760713198}
   keyScript: {fileID: 298566856}
   endWave: 0
   waves:
@@ -13378,31 +13388,31 @@ MonoBehaviour:
   square_0_0:
     label: TopLeft
     lockObject: {fileID: 1392667526}
-    isOpen: 1
+    isOpen: 0
   square_0_1:
     label: TopMiddle
     lockObject: {fileID: 778255867}
-    isOpen: 1
+    isOpen: 0
   square_0_2:
     label: TopRight
     lockObject: {fileID: 1472878221}
-    isOpen: 1
+    isOpen: 0
   square_1_0:
     label: MiddleLeft
     lockObject: {fileID: 1922592361}
-    isOpen: 1
+    isOpen: 0
   square_1_1:
     label: middle
     lockObject: {fileID: 655649536}
-    isOpen: 1
+    isOpen: 0
   square_1_2:
     label: MiddleRight
     lockObject: {fileID: 1842939352}
-    isOpen: 1
+    isOpen: 0
   square_2_0:
     label: BotLeft
     lockObject: {fileID: 98344407}
-    isOpen: 1
+    isOpen: 0
   square_2_1:
     label: Main
     lockObject: {fileID: 1272866184}
@@ -13410,7 +13420,7 @@ MonoBehaviour:
   square_2_2:
     label: BotRight
     lockObject: {fileID: 1684221934}
-    isOpen: 1
+    isOpen: 0
 --- !u!4 &1656559790
 Transform:
   m_ObjectHideFlags: 0
@@ -13718,7 +13728,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1684221935
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -14806,7 +14816,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68e6e2ce8cbdaab45b2c63e63d3ed301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GoldCoinHave: 0
+  GoldCoinHave: 200
   GoldCoin: {fileID: 21300000, guid: 545c4a3de79fd8c40aa60a07ffbe707c, type: 3}
   goldText: {fileID: 2051271346}
 --- !u!4 &1760713199
@@ -15184,7 +15194,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1842939353
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -15779,7 +15789,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1922592362
 SpriteRenderer:
   m_ObjectHideFlags: 0

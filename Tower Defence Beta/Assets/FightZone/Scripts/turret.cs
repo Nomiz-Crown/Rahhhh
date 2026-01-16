@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class turret : MonoBehaviour
 {
+    public bool isOriginal = false;
+
+    public TrackLock trackLock;
+    public Gold Gold;
+
+    public GameObject Mana;
     public GameObject orngg;
     public int dmg = 25;
 
@@ -38,6 +44,10 @@ public class turret : MonoBehaviour
 
     private void Start()
     {
+        if (isOriginal)
+        {
+            trackLock.endWave = true;
+        }
         CantPlace.SetActive(false);
 
         // 🔥 THIS FIXES IT 🔥 yay tack gpt
@@ -84,6 +94,7 @@ public class turret : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
+                Mana.SetActive(true);
                 isPlacing = false;
                 isPlaced = true;
                 rangeIndicator.SetActive(false);
@@ -147,9 +158,11 @@ public class turret : MonoBehaviour
 
     public void StartPlacingTurret()
     {
-        if (!isPlacing)
+        if (!isPlacing && Gold.GoldCoinHave > 99)
         {
+            Gold.AddGold(-100);
             turretInstance = Instantiate(turretPrefab);
+            turretInstance.GetComponent<turret>().isOriginal = false;
             isPlaced = false; // this one is a ghost
 
             GameObject ghostRange = turretInstance.transform.Find("Range")?.gameObject;

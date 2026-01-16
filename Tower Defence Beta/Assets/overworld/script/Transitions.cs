@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Transitions : MonoBehaviour
 {
-    public lock TrackLock;
+    public TrackLock trackLock;
 
     [Header("UI")]
     public GameObject transition;
@@ -26,7 +26,7 @@ public class Transitions : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && trackLock.endWave == true)
         {
             if (animationRoutine != null) 
             StopCoroutine(animationRoutine);

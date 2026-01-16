@@ -13,16 +13,19 @@ public class TrackSquareTrigger : MonoBehaviour
         if (triggered) return;
         if (other.CompareTag("Player"))
         {
-            triggered = true;
+            if(trackLock.endWave && keyManager.keyCollected){
+                triggered = true;
 
-            trackLock.TryOpenSquare(square);
+                trackLock.TryOpenSquare(square);
 
-            // Start the next wave manually
-            trackLock.StartNextWaveManual();
-            trackLock.endWave = false;
+                // Start the next wave manually
+                trackLock.StartNextWaveManual();
+                trackLock.endWave = false;
 
-            // Reset the key cleanly
-            keyManager.ResetKey();
+                // Reset the key cleanly
+                keyManager.ResetKey();
+            }
+            
         }
     }
 }

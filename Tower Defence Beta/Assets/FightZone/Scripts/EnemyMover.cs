@@ -99,7 +99,6 @@ public class EnemyMover : MonoBehaviour
             inZone = true;
             currentSpeed = baseSpeed * 100f;
             reachDistance = zoneReachDistance;
-            Debug.Log("Entered Zone! Speed boosted, waypoint margin increased.");
         }
     }
 
@@ -112,7 +111,6 @@ public class EnemyMover : MonoBehaviour
             inZone = false;
             currentSpeed = baseSpeed;
             reachDistance = defaultReachDistance;
-            Debug.Log("Exited Zone! Speed reset, waypoint margin normal.");
         }
     }
 }
