@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class turret : MonoBehaviour
 {
+    public int Cost = 100;
     public bool isOriginal = false;
 
     public TrackLock trackLock;
@@ -158,9 +159,9 @@ public class turret : MonoBehaviour
 
     public void StartPlacingTurret()
     {
-        if (!isPlacing && Gold.GoldCoinHave > 99)
+        if (!isPlacing && Gold.GoldCoinHave > (Cost - 1))
         {
-            Gold.AddGold(-100);
+            Gold.AddGold(- Cost);
             turretInstance = Instantiate(turretPrefab);
             turretInstance.GetComponent<turret>().isOriginal = false;
             isPlaced = false; // this one is a ghost
