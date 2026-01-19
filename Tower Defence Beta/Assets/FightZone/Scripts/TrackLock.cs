@@ -161,6 +161,7 @@ public class TrackLock : MonoBehaviour
         {
             currentWaveIndex++;
             StartCoroutine(StartWave(waves[currentWaveIndex]));
+           
         }
     }
 
