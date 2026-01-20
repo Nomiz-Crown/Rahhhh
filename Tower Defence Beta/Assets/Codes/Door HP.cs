@@ -20,7 +20,7 @@ public class DoorHP : MonoBehaviour
         DoorCurrentHp -= attack;
         if( DoorCurrentHp <= 0)
         {
-            SceneManager.LoadSceneAsync(0); 
+            SceneManager.LoadSceneAsync(4); 
         }
     }
     // Update is called once per frame
